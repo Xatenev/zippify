@@ -83,3 +83,7 @@ h3 {
     font-weight: 300;
     text-decoration: none;
 }
+
+.hidden {
+    display: none !important;
+}

@@ -4,12 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <meta name="description" content="Zippify">
+    <script src="../../vendor/js/micromodal.js"></script>
     <script src="../../vendor/js/dropzone.js"></script>
     <script src="../../js/dropzone_options.js"></script>
+    <script src="../../js/settings.js"></script>
     <link rel="stylesheet" href="../../vendor/css/dropzone.css">
+    <link rel="stylesheet" href="../../vendor/css/hover-min.css">
+    <link rel="stylesheet" href="../../css/checkbox.css">
     <link rel="stylesheet" href="../../css/dropzone.css">
     <link rel="stylesheet" href="../../css/loading.css">
     <link rel="stylesheet" href="../../css/main.css">
+    <script src="https://kit.fontawesome.com/9843e0173c.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Inter:300,300italic,200,200italic,400,400italic%7CPoppins:200,200italic,400,400italic%7CManrope:300,300italic"
           rel="stylesheet" type="text/css">
 </head>
@@ -24,6 +29,22 @@
                     <form action="/upload" class="dropzone needsclick dz-clickable" id="zippify-upload">
                         <div class="dz-message needsclick">
                             <button type="button" class="dz-button">Drop files here or click to upload.</button>
+                        </div>
+
+                        <div class="settings-menu hidden">
+                            <hr>
+
+                            <div class="checkbox-group">
+                                <input type="checkbox" name="settings" id="settings-virus" value="1">
+                                <label for="settings-virus">VirusTotal<i class="fas fa-shield-virus"></i></label>
+
+                                <input type="checkbox" name="settings" id="settings-share" value="1">
+                                <label for="settings-share">Share<i class="fas fa-share-alt"></i></label>
+                            </div>
+                        </div>
+
+                        <div class="settings open hvr-pulse-grow">
+                            <i class="fas fa-wrench"></i>
                         </div>
 
                         <div class="loading">

@@ -32,3 +32,5 @@ logging
 mobile
 
 html validator check
+
+frontend libs to npm

@@ -1,0 +1,46 @@
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.checkbox-group input {
+    display: none;
+}
+.checkbox-group label {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+    transition: 0.5s color ease;
+    white-space: nowrap;
+    cursor: pointer;
+    position: relative;
+    color: #8F4066;
+    letter-spacing: 0.15rem;
+    font-family: 'Inter', sans-serif;
+}
+.checkbox-group label::before {
+    content: "";
+    width: 1.5em;
+    height: 1.5em;
+    border: 0.125em solid #8F4066;
+    border-radius: 0.25em;
+}
+.checkbox-group input:checked + label {
+    color: #fff;
+}
+
+.checkbox-group label::after {
+    content: "";
+    width: 1em;
+    height: 1em;
+    top: 0.375em;
+    left: 0.375em;
+    border-radius: 4px;
+    background-color: #8F4066;
+    position: absolute;
+    transform: scale(0);
+    transition: 0.5s transform ease;
+}
+.checkbox-group input:checked + label::after {
+    transform: scale(1);
+}
