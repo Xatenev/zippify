@@ -29,8 +29,16 @@ PHPDOC
 
 logging
 
-mobile
+mobile view
 
 html validator check
 
 testing
+
+virus checking
+
+select compression method
+
+save generated zips in db for <selected time by user>
+
+cleanup script
