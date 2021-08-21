@@ -4,6 +4,7 @@
 /upload/
 !/upload/.gitkeep
 
+/deployment/
 
 /public/out/
 !/public/out/.gitkeep
