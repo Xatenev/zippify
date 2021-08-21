@@ -1,0 +1,23 @@
+{
+    "name": "xatenev/zippify",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Xatenev\\Zippify\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Xatenev",
+            "email": "xatenev@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "4.*",
+        "slim/psr7": "^1.4",
+        "slim/php-view": "^3.1",
+        "php-di/php-di": "^6.3",
+        "ext-zip": "*"
+    }
+}

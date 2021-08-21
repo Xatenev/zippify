@@ -1,0 +1,9 @@
+/.idea/
+
+/vendor/
+/upload/
+!/upload/.gitkeep
+
+
+/public/out/
+!/public/out/.gitkeep
