@@ -41,4 +41,4 @@ select compression method
 
 save generated zips in db for <selected time by user>
 
-cleanup script
+cleanup script possible cron
