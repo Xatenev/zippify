@@ -29,8 +29,18 @@ PHPDOC
 
 logging
 
-mobile
+mobile view
 
 html validator check
 
 frontend libs to npm
+
+testing
+
+virus checking
+
+select compression method
+
+save generated zips in db for <selected time by user>
+
+cleanup script possible cron
