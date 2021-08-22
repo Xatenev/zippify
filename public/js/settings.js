@@ -22,4 +22,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
         dropzone.classList.toggle('expanded');
         settings.classList.toggle('close');
     });
+
+    const password = document.querySelector('input#settings-password');
+    const passwordInput = document.querySelector('input#settings-password-input');
+
+    password.addEventListener('change', function(event) {
+        passwordInput.parentElement.classList.toggle('hidden');
+
+        if(event.currentTarget.checked) {
+            passwordInput.focus();
+        } else {
+            passwordInput.value = '';
+        }
+    })
 });

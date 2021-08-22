@@ -2,20 +2,22 @@
 
 namespace Xatenev\Zippify\Service;
 
-use Slim\Psr7\UploadedFile;
 use ZipArchive;
 
 class CompressService
 {
 
-    public function __construct(private string $outDirectory) {}
+    public function __construct(private string $outDirectory)
+    {
+    }
 
-    public function zip(string $directory) {
+    public function zip(string $directory)
+    {
         $zip = new ZipArchive();
         $filename = bin2hex(random_bytes(GENERATED_FILES_TOKEN_LENGTH)) . '.zip';
         $fullyQualifiedName = $this->outDirectory . $filename;
 
-        if ($zip->open($fullyQualifiedName, ZipArchive::CREATE)!==TRUE) {
+        if ($zip->open($fullyQualifiedName, ZipArchive::CREATE) !== TRUE) {
             // @todo: Logging
             exit("cannot open <$fullyQualifiedName>\n");
         }
@@ -32,6 +34,6 @@ class CompressService
 
         $zip->close();
 
-        return $filename;
+        return $fullyQualifiedName;
     }
 }

@@ -44,3 +44,5 @@ select compression method
 save generated zips in db for <selected time by user>
 
 cleanup script possible cron
+
+too fast clicking on settings icon breaks timeout functionality

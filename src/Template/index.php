@@ -35,11 +35,29 @@
                             <hr>
 
                             <div class="checkbox-group">
-                                <input type="checkbox" name="settings" id="settings-virus" value="1">
-                                <label for="settings-virus">VirusTotal<i class="fas fa-shield-virus"></i></label>
-
-                                <input type="checkbox" name="settings" id="settings-share" value="1">
-                                <label for="settings-share">Share<i class="fas fa-share-alt"></i></label>
+                                <div>
+                                    <div>
+                                        <input type="checkbox" name="settings" id="settings-tar" value="1">
+                                        <label for="settings-tar">tar<i class="fas fa-file-archive"></i></label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="settings" id="settings-gz" value="1">
+                                        <label for="settings-gz">.gz compression<i class="fas fa-archive"></i></label>
+                                    </div>
+                                    <div class="password-input hidden">
+                                        <input type="text" id="settings-password-input" name="password">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <input type="checkbox" name="settings" id="settings-password" value="1">
+                                        <label for="settings-password">password<i class="fas fa-lock"></i></label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="settings" id="settings-share" value="1">
+                                        <label for="settings-share">share<i class="fas fa-share-alt"></i></label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

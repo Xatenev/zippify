@@ -18,6 +18,7 @@
         "slim/psr7": "^1.4",
         "slim/php-view": "^3.1",
         "php-di/php-di": "^6.3",
-        "ext-zip": "*"
+        "ext-zip": "*",
+        "guzzlehttp/guzzle": "^7.0"
     }
 }

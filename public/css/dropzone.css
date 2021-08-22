@@ -4,23 +4,20 @@
     align-items: center;
     margin-top: 60px;
     flex-direction: column;
-
     border-radius: 4px;
-
     transition: 500ms ease height;
     height: 222px;
     background: transparent;
 }
 
 .dropzone.expanded {
-    height: 400px;
+    height: 450px;
 }
 
 .dropzone .settings {
     align-self: flex-end;
     color: #fff;
     cursor: pointer;
-
     margin-top: auto;
 }
 
@@ -61,6 +58,9 @@
     border-color: #8F4066;
     width: 100%;
     margin: 0 0 50px 0;
+    border-width: 2px;
+    border-radius: 100%;
+    border-style: dotted;
 }
 
 .dropzone .dz-preview .dz-details .dz-filename span, .dropzone .dz-preview .dz-details .dz-size span {

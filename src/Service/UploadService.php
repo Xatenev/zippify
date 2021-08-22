@@ -49,6 +49,6 @@ class UploadService
 
         $uploadedFile->moveTo($directory . DS . $filename);
 
-        return $filename;
+        return $directory . DS . $filename;
     }
 }
