@@ -9,20 +9,18 @@ use Slim\Views\PhpRenderer;
 $app->get('/', function (Request $request, Response $response, $args) {
     $renderer = new PhpRenderer(TEMPLATE_DIR);
 
-    return $renderer->render($response, 'index.php', [
-        'tar' => false,
-        'gz' => false,
-        'password' => false,
-        'share' => false,
-        'settings' => false
-    ]);
+    return $renderer->render(
+        $response,
+        'index.php',
+        array_fill_keys(['tar', 'gz', 'password', 'share', 'settings'], false)
+    );
 });
 
 $app->get('/{route}', function (Request $request, Response $response, $args) {
     $renderer = new PhpRenderer(TEMPLATE_DIR);
 
     $route = $args['route'];
-    
+
     $view = [];
     $view['tar'] = str_contains($route, 'tar');
     $view['gz'] = str_contains($route, 'tar') && str_contains($route, 'gz');
@@ -30,5 +28,9 @@ $app->get('/{route}', function (Request $request, Response $response, $args) {
     $view['share'] = str_contains($route, 'share');
     $view['settings'] = in_array(true, $view);
 
-    return $renderer->render($response, 'index.php', $view);
+    return $renderer->render(
+        $response,
+        'index.php',
+        $view
+    );
 });
