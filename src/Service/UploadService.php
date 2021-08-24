@@ -2,12 +2,16 @@
 
 namespace Xatenev\Zippify\Service;
 
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use Slim\Psr7\UploadedFile;
 
 class UploadService
 {
 
-    public function __construct(private string $uploadDirectory) {}
+    public function __construct(private string $uploadDirectory)
+    {
+    }
 
     /**
      * Creates a directory by given $directory and moves the uploaded files to the upload directory and
@@ -50,5 +54,19 @@ class UploadService
         $uploadedFile->moveTo($directory . DS . $filename);
 
         return $directory . DS . $filename;
+    }
+
+    public function remove(string $directory)
+    {
+        $it = new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::SKIP_DOTS);
+        $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
+        foreach ($files as $file) {
+            if ($file->isDir()) {
+                rmdir($file->getRealPath());
+            } else {
+                unlink($file->getRealPath());
+            }
+        }
+        rmdir($directory);
     }
 }

@@ -3,7 +3,7 @@
 namespace Xatenev\Zippify\Controller;
 
 use Slim\Routing\RouteCollectorProxy;
-use Xatenev\Zippify\Service\CompressService;
+use Xatenev\Zippify\Service\ArchiveService;
 use Xatenev\Zippify\Service\ScannerService;
 use Xatenev\Zippify\Service\UploadService;
 
@@ -11,8 +11,8 @@ $app->group('/file', function (RouteCollectorProxy $group) {
     $group->post('', function ($request, $response, array $args) {
         /** @var UploadService $uploadService */
         $uploadService = $this->get('uploadService');
-        /** @var CompressService $compressService */
-        $compressService = $this->get('compressService');
+        /** @var ArchiveService $archiveService */
+        $archiveService = $this->get('archiveService');
 
         $settings = $request->getParsedBody();
         $password = $settings['password'];
@@ -23,16 +23,27 @@ $app->group('/file', function (RouteCollectorProxy $group) {
         $uploadedFiles = $request->getUploadedFiles();
         $directory = $uploadService->moveUploadedFiles($uploadedFiles['file']);
 
-        $zip = $compressService->zip($directory);
+        $archive = null;
 
-        if(strlen($password) > 0) {
-            $compressService->password($zip, $password);
+        if($tar) {
+            $archive = $archiveService->tar($directory);
+
+            if($gz) {
+                $archive = $archiveService->gz($archive);
+            }
+        } else {
+            $archive = $archiveService->zip($directory);
+
+            if(strlen($password) > 0) {
+                $archiveService->password($archive, $password);
+            }
         }
 
-        $response->getBody()->write(OUT_URL .  $compressService->name($zip));
+        $response->getBody()->write(OUT_URL .  $archiveService->name($archive));
 
-        $compressService->close($zip);
+        $uploadService->remove($directory);
 
+        $archiveService->close($archive);
         return $response;
     })->setName('createFile');
 });
