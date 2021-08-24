@@ -11,7 +11,15 @@ class CompressService
     {
     }
 
-    public function zip(string $directory)
+    public function password(ZipArchive $zip, string $password) {
+        $zip->setPassword($password);
+
+        for($i = 0; $i < $zip->numFiles; $i++) {
+            $zip->setEncryptionIndex($i, ZipArchive::EM_AES_256);
+        }
+    }
+
+    public function zip(string $directory): ZipArchive
     {
         $zip = new ZipArchive();
         $filename = bin2hex(random_bytes(GENERATED_FILES_TOKEN_LENGTH)) . '.zip';
@@ -32,8 +40,18 @@ class CompressService
             }
         }
 
-        $zip->close();
+        return $zip;
+    }
 
-        return $fullyQualifiedName;
+    public function name(ZipArchive $zip) {
+        return substr($zip->filename, strrpos($zip->filename, '/') + 1);
+    }
+
+    public function path(ZipArchive $zip) {
+        return $zip->filename;
+    }
+
+    public function close(ZipArchive $zip) {
+        $zip->close();
     }
 }

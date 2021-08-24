@@ -4,8 +4,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     const settingsMenu = document.querySelector('.settings-menu');
     const dropzone = document.querySelector('.dropzone')
     settings.addEventListener('click', function(event) {
-
-        console.log(event.target.parentElement.className);
         if (event.target.parentElement.classList.contains('close')) {
             settingsIcon.classList.remove('fa-times');
             settingsIcon.classList.add('fa-wrench');

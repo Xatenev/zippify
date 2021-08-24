@@ -13,15 +13,26 @@ $app->group('/file', function (RouteCollectorProxy $group) {
         $uploadService = $this->get('uploadService');
         /** @var CompressService $compressService */
         $compressService = $this->get('compressService');
-        /** @var ScannerService $scannerService */
-        $scannerService = $this->get('scannerService');
+
+        $settings = $request->getParsedBody();
+        $password = $settings['password'];
+        $tar = json_decode($settings['tar']);
+        $gz = json_decode($settings['gz']);
+        $share = json_decode($settings['share']);
 
         $uploadedFiles = $request->getUploadedFiles();
         $directory = $uploadService->moveUploadedFiles($uploadedFiles['file']);
 
         $zip = $compressService->zip($directory);
 
-        $response->getBody()->write(OUT_URL .  substr($zip, strrpos($zip, '/') + 1));
+        if(strlen($password) > 0) {
+            $compressService->password($zip, $password);
+        }
+
+        $response->getBody()->write(OUT_URL .  $compressService->name($zip));
+
+        $compressService->close($zip);
+
         return $response;
     })->setName('createFile');
 });
