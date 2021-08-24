@@ -26,43 +26,42 @@
                 <div class="inner">
                     <h3>Zip all your files instantly</h3>
                     <h1>Zippify</h1>
-                    <form action="/upload" class="dropzone needsclick dz-clickable" id="zippify-upload">
+                    <form action="/upload" class="dropzone needsclick dz-clickable <?= $settings ? 'expanded' : '' ?>" id="zippify-upload">
                         <div class="dz-message needsclick">
                             <button type="button" class="dz-button">Drop files here or click to upload.</button>
                         </div>
 
-                        <div class="settings-menu hidden">
+                        <div class="settings-menu <?= $settings ? '' : 'hidden' ?>">
                             <hr>
-
                             <div class="checkbox-group">
                                 <div>
                                     <div>
-                                        <input type="checkbox" name="settings" id="settings-tar" value="1">
+                                        <input type="checkbox" name="settings" id="settings-tar" <?= $tar ? 'checked' : '' ?>>
                                         <label for="settings-tar">tar<i class="fas fa-file-archive"></i></label>
                                     </div>
                                     <div>
-                                        <input type="checkbox" name="settings" id="settings-gz" value="1">
+                                        <input type="checkbox" name="settings" id="settings-gz" <?= $gz ? 'checked' : '' ?>>
                                         <label for="settings-gz">.gz compression<i class="fas fa-archive"></i></label>
                                     </div>
-                                    <div class="password-input hidden">
+                                    <div class="password-input <?= $password ? '' : 'hidden' ?>">
                                         <input type="text" id="settings-password-input" name="password">
                                     </div>
                                 </div>
                                 <div>
                                     <div>
-                                        <input type="checkbox" name="settings" id="settings-password" value="1">
+                                        <input type="checkbox" name="settings" id="settings-password" <?= $password ? 'checked' : '' ?>>
                                         <label for="settings-password">password<i class="fas fa-lock"></i></label>
                                     </div>
                                     <div>
-                                        <input type="checkbox" name="settings" id="settings-share" value="1">
+                                        <input type="checkbox" name="settings" id="settings-share" <?= $share ? 'checked' : '' ?>>
                                         <label for="settings-share">share<i class="fas fa-share-alt"></i></label>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="settings open hvr-pulse-grow">
-                            <i class="fas fa-wrench"></i>
+                        <div class="settings open <?= $settings ? 'close' : '' ?> hvr-pulse-grow">
+                            <i class="fas <?= $settings ? 'fa-times' : 'fa-wrench' ?>"></i>
                         </div>
 
                         <div class="loading">

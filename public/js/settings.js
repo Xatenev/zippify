@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(event) {
+
     const settings = document.querySelector('.settings');
     const settingsIcon = document.querySelector('.settings.open i');
     const settingsMenu = document.querySelector('.settings-menu');
@@ -32,5 +33,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
         } else {
             passwordInput.value = '';
         }
-    })
+    });
+
+    if(document.location.pathname.indexOf('password') !== -1) {
+        passwordInput.focus();
+    }
 });
