@@ -6,6 +6,9 @@ This tool allows you to download a generated zip from multiple files.
 
 ## Web
 
+Username: admin 
+Password: 123 
+
 http://zippify.xatenev.com/
 
 ## Run dev
