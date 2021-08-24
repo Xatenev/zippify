@@ -30,6 +30,7 @@ php -S localhost:8888
 
 - phpdoc
 - testing
+- disable settings dependent on user input, e.g. tar + password doesn't work together
 - success/error messages after upload
 - keep original file names inside the zip/tar (need db-mapping for this first)
 - replace const.php with proper dependency injection
