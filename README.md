@@ -45,7 +45,7 @@ php -S localhost:8888
 - save generated zips in db to make sharing with friends possible
 - upload limits (file size, file count)
 - cleanup file script
-- re-adjust setting animation, clicking too fast breaks animation
+- re-adjust settings animation, clicking too fast breaks animation
 - dev-experience composer scripts (start server, clean files etc.)
 
 # Possible later enhancements
