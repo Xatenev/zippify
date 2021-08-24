@@ -88,7 +88,7 @@ class ArchiveService
     public function name(ZipArchive|PharData $archive)
     {
         if ($archive instanceof ZipArchive) {
-            return substr($archive->filename, strrpos($archive->filename, '/') + 1);
+            return substr($archive->filename, strrpos($archive->filename, DS) + 1);
         } else {
             return $archive->getMetadata()['archiveFileName'];
         }
