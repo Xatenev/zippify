@@ -15,6 +15,9 @@ http://zippify.xatenev.com/
 ## Run dev
 
 ````
+git clone https://github.com/Xatenev/zippify.git
+cd zippify
+composer install
 cd public
 php -S localhost:8888
 ```` 
