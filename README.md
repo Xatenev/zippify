@@ -24,9 +24,12 @@ php -S localhost:8888
 # TODO
 
 - phpdoc
+- keep original file names inside the zip/tar (need db-mapping for this first)
+- 
 - replace const.php with proper dependency injection
 - logging
 - responsive mobile view
+- help dialogue that explains keyboard navigation and bookmark functionality to the user (its possible to add a route like /targz as browser bookmark to automatically open the page with selected 'tar' and 'gz' settings)
 - html validator check
 - frontend lib management (npm/bower...)
 - ~virus checking~ (doesn't work in a way that makes sense for the user)
@@ -38,3 +41,6 @@ php -S localhost:8888
 - re-adjust setting animation, clicking too fast breaks animation
 - dev-experience composer scripts (start server, clean files etc.)
 
+# Possible later enhancements
+
+- decompress functionality (upload zip, get list of files inside. have to be careful here, zipbomb etc.)
