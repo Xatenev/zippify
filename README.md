@@ -21,7 +21,7 @@ php -S localhost:8888
 - Virus check all files
 - Share generated zips with friends
 
-# TODO
+# Todo until v1.0
 
 - phpdoc
 - keep original file names inside the zip/tar (need db-mapping for this first)
