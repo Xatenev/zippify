@@ -25,7 +25,6 @@ php -S localhost:8888
 
 - phpdoc
 - keep original file names inside the zip/tar (need db-mapping for this first)
-- 
 - replace const.php with proper dependency injection
 - logging
 - responsive mobile view
