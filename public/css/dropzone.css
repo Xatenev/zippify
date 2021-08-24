@@ -27,6 +27,9 @@
     padding: 10px;
     color: #8F4066;
     cursor: pointer;
+    display: block;
+    width: 46px;
+    height: 46px;
 }
 
 .dropzone .settings.close i {
