@@ -24,6 +24,7 @@ php -S localhost:8888
 # Todo until v1.0
 
 - phpdoc
+- testing
 - keep original file names inside the zip/tar (need db-mapping for this first)
 - replace const.php with proper dependency injection
 - logging
