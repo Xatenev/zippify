@@ -18,7 +18,8 @@ php -S localhost:8888
 ## Features
 - Drag and drop functionality
 - Select compression method
-- Virus check all files
+- Password protected archives
+- Settings can be stored as bookmarks, e.g. http://zippify.xatenev.com/passwordtargz
 - Share generated zips with friends
 
 # Todo until v1.0
