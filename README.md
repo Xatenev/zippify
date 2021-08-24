@@ -23,26 +23,18 @@ php -S localhost:8888
 
 # TODO
 
-replace const.php with proper injection
+- phpdoc
+- replace const.php with proper dependency injection
+- logging
+- responsive mobile view
+- html validator check
+- frontend lib management (npm/bower...)
+- ~virus checking~ (doesn't work in a way that makes sense for the user)
+- more compression methods (.gz is implemented, bzip2 can still be added)
+- keyboard navigation
+- save generated zips in db to make sharing with friends possible
+- upload limits (file size, file count)
+- cleanup file script
+- re-adjust setting animation, clicking too fast breaks animation
+- dev-experience composer scripts (start server, clean files etc.)
 
-PHPDOC
-
-logging
-
-mobile view
-
-html validator check
-
-frontend libs to npm
-
-testing
-
-virus checking
-
-select compression method
-
-save generated zips in db for <selected time by user>
-
-cleanup script possible cron
-
-too fast clicking on settings icon breaks timeout functionality
