@@ -13,6 +13,10 @@
             "email": "xatenev@gmail.com"
         }
     ],
+    "scripts": {
+        "start": "Xatenev\\Zippify\\Command\\StartCommand::start",
+        "clean": "Xatenev\\Zippify\\Command\\CleanCommand::clean"
+    },
     "require": {
         "slim/slim": "4.*",
         "slim/psr7": "^1.4",
