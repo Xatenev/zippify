@@ -29,7 +29,7 @@ class UploadService
 
         foreach ($uploadedFiles as $file) {
             if ($file->getError() === UPLOAD_ERR_OK) {
-                $filename = $this->moveUploadedFile($fullyQualifiedDirectoryName, $file);
+                $this->moveUploadedFile($fullyQualifiedDirectoryName, $file);
             }
         }
 
