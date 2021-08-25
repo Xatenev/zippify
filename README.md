@@ -39,7 +39,7 @@ php -S localhost:8888
 - replace const.php with proper dependency injection
 - logging
 - responsive mobile view
-- help dialogue that explains keyboard navigation and bookmark functionality to the user (its possible to add a route like /targz as browser bookmark to automatically open the page with selected 'tar' and 'gz' settings)
+- help dialogue that explains keyboard navigation and bookmark functionality to the user (its possible to add a route like /targz as browser bookmark to automatically open the page with selected 'tar' and 'gz' settings), curl usage
 - html validator check
 - frontend lib management (npm/bower...)
 - ~virus checking~ (doesn't work in a way that makes sense for the user)
