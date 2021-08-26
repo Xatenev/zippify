@@ -22,8 +22,8 @@ $app->get('/{route}', function (Request $request, Response $response, $args) {
     $route = $args['route'];
 
     $view = [];
-    $view['tar'] = str_contains($route, 'tar');
-    $view['gz'] = str_contains($route, 'tar') && str_contains($route, 'gz');
+    $view['tar'] = str_contains($route, 'gz') || str_contains($route, 'tar');
+    $view['gz'] = str_contains($route, 'gz');
     $view['password'] = str_contains($route, 'password');
     $view['share'] = str_contains($route, 'share');
     $view['settings'] = in_array(true, $view);

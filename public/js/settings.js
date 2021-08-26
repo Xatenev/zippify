@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
         settings.classList.toggle('close');
     });
 
+    const tar = document.querySelector('input#settings-tar');
+    const gz = document.querySelector('input#settings-gz');
     const password = document.querySelector('input#settings-password');
     const passwordInput = document.querySelector('input#settings-password-input');
 
@@ -29,9 +31,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
         passwordInput.parentElement.classList.toggle('hidden');
 
         if(event.currentTarget.checked) {
+            tar.disabled = true;
+            gz.disabled = true;
             passwordInput.focus();
         } else {
+            tar.disabled = false;
+            gz.disabled = false;
             passwordInput.value = '';
+        }
+    });
+
+
+    tar.addEventListener('change', function(event) {
+        if(event.currentTarget.checked) {
+            password.disabled = true;
+        } else {
+            password.disabled = false;
         }
     });
 

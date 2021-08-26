@@ -51,8 +51,15 @@
     border: 2px solid #8F4066;
     border-radius: 4px;
 }
+
 .checkbox-group input:checked + label {
     color: #fff;
+}
+
+.checkbox-group input:disabled + label::before, .checkbox-group input:disabled + label {
+    color: #808080;
+    border-color: #808080;
+    text-decoration: line-through;
 }
 
 .checkbox-group label::after {

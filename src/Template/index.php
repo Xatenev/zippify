@@ -39,21 +39,21 @@
                             <div>
                                 <div>
                                     <input type="checkbox" name="settings"
-                                           id="settings-tar" <?= $tar ? 'checked' : '' ?>>
+                                           id="settings-tar" <?= $tar ? 'checked' : '' ?> <?= !$tar && $password ? 'disabled' : '' ?>>
                                     <label for="settings-tar">tar<i class="fas fa-file-archive"></i></label>
                                 </div>
                                 <div>
-                                    <input type="checkbox" name="settings" id="settings-gz" <?= $gz ? 'checked' : '' ?>>
+                                    <input type="checkbox" name="settings" id="settings-gz" <?= $gz ? 'checked' : '' ?> <?= !$tar ? 'disabled' : '' ?>>
                                     <label for="settings-gz">.gz<i class="fas fa-archive"></i></label>
                                 </div>
                             </div>
                             <div>
                                 <div>
                                     <input type="checkbox" name="settings"
-                                           id="settings-password" <?= $password ? 'checked' : '' ?>>
+                                           id="settings-password" <?= !$tar && $password ? 'checked' : '' ?> <?= $tar ? 'disabled' : '' ?>>
                                     <label for="settings-password">password<i class="fas fa-lock"></i></label>
                                 </div>
-                                <div class="password-input <?= $password ? '' : 'hidden' ?>">
+                                <div class="password-input <?= !$tar && $password ? '' : 'hidden' ?>">
                                     <input type="text" id="settings-password-input" name="password">
                                 </div>
                                 <div>
