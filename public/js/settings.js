@@ -44,8 +44,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     tar.addEventListener('change', function(event) {
         if(event.currentTarget.checked) {
+            gz.disabled = false;
             password.disabled = true;
         } else {
+            gz.disabled = true;
             password.disabled = false;
         }
     });
