@@ -2,6 +2,7 @@
 
 namespace Xatenev\Zippify\Service;
 
+use phpMussel\Core\Scanner;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Slim\Psr7\UploadedFile;
@@ -9,7 +10,7 @@ use Slim\Psr7\UploadedFile;
 class UploadService
 {
 
-    public function __construct(private string $uploadDirectory)
+    public function __construct(private string $uploadDirectory, private Scanner $virusScanner)
     {
     }
 
@@ -68,5 +69,15 @@ class UploadService
             }
         }
         rmdir($directory);
+    }
+
+    /**
+     * Scan all files in the provided $directory.
+     *
+     * @param string $directory
+     * @return bool If malicious data is found, returns true, else false
+     */
+    public function virusScan(string $directory): bool {
+        return $this->virusScanner->scan($directory, 2);
     }
 }

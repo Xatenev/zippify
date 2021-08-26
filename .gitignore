@@ -8,3 +8,9 @@
 
 /public/out/
 !/public/out/.gitkeep
+
+/phpmussel/cache/
+!/phpmussel/cache/.gitkeep
+
+/phpmussel/quarantine/
+!/phpmussel/quarantine/.gitkeep

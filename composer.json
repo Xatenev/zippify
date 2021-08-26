@@ -23,6 +23,7 @@
         "slim/php-view": "^3.1",
         "php-di/php-di": "^6.3",
         "ext-zip": "*",
-        "guzzlehttp/guzzle": "^7.0"
+        "guzzlehttp/guzzle": "^7.0",
+        "phpmussel/core": "^3.2"
     }
 }
