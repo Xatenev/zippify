@@ -14,6 +14,10 @@ body {
     line-height: 1;
 }
 
+.inner {
+    margin: 0 40px;
+}
+
 body:before {
     content: '';
     position: fixed;
@@ -35,12 +39,7 @@ section#main {
     text-align: center;
 }
 
-.inner {
-    width: 30vw;
-}
-
 .container {
-    overflow-y: hidden;
     overflow-x: hidden;
     display: flex;
     min-height: 100vh;
@@ -65,7 +64,6 @@ h1 {
     color: #FFFFFF;
     font-family: 'Poppins', sans-serif;
     letter-spacing: -0.075rem;
-    width: 100%;
     font-size: 4.25em;
     line-height: 1.125;
     font-weight: 200;
@@ -77,7 +75,6 @@ h3 {
     color: #8F4066;
     font-family: 'Inter', sans-serif;
     letter-spacing: 0.15rem;
-    width: calc(100% + 0.15rem);
     font-size: 0.875em;
     line-height: 1.625;
     font-weight: 300;

@@ -1,0 +1,12 @@
+@media (min-width: 768px) {
+    .checkbox-group {
+        flex-direction: row;
+        gap: 1em;
+        justify-content: center;
+    }
+
+    .dropzone.expanded {
+        height: 450px;
+    }
+
+}
