@@ -31,26 +31,27 @@ php -S localhost:8888
 
 # Todo until v1.0
 
-- phpdoc
-- testing
-- disable settings dependent on user input, e.g. tar + password doesn't work together
-- success/error messages after upload
-- keep original file names inside the zip/tar (need db-mapping for this first)
-- replace const.php with proper dependency injection
-- logging
-- responsive mobile view
-- help dialogue that explains keyboard navigation and bookmark functionality to the user (its possible to add a route like /targz as browser bookmark to automatically open the page with selected 'tar' and 'gz' settings), curl usage
-- html validator check
-- frontend lib management (npm/bower...)
-- ~virus checking~ (doesn't work in a way that makes sense for the user)
-- more compression methods (.gz is implemented, bzip2 can still be added)
-- keyboard navigation
-- save generated zips in db to make sharing with friends possible
-- upload limits (file size, file count)
-- cleanup file script
-- re-adjust settings animation, clicking too fast breaks animation
-- dev-experience composer scripts (start server, clean files etc.)
+- [x] responsive mobile view
+- [x] disable settings dependent on user input, e.g. tar + password doesn't work together
+- [x] cleanup file script
+- [x] dev-experience composer scripts (start server, clean files etc.)
+- [x] re-adjust settings animation, clicking too fast breaks animation
+  
+- [ ] virus checking (doesn't work in a way that makes sense for the user, test out phpmussel
+- [ ] phpdoc
+- [ ] testing
+- [ ] success/error messages after upload
+- [ ] keep original file names inside the zip/tar (need db-mapping for this first)
+- [ ] replace const.php with proper dependency injection
+- [ ] logging
+- [ ] help dialogue that explains keyboard navigation and bookmark functionality to the user (its possible to add a route like /targz as browser bookmark to automatically open the page with selected 'tar' and 'gz' settings), curl usage
+- [ ] html validator check
+- [ ] frontend lib management (npm/bower...)
+- [ ] more compression methods (.gz is implemented, bzip2 can still be added)
+- [ ] keyboard navigation
+- [ ] save generated zips in db to make sharing with friends possible
+- [ ] upload limits (file size, file count)
 
 # Possible later enhancements
 
-- decompress functionality (upload zip, get list of files inside. have to be careful here, zipbomb etc.)
+- [ ] decompress functionality (upload zip, get list of files inside. have to be careful here, zipbomb etc.)
