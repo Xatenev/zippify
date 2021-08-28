@@ -31,6 +31,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     password.addEventListener('change', function(event) {
         passwordInput.parentElement.classList.toggle('hidden');
+        requestAnimationFrame(function() {
+            passwordInput.value = '';
+        });
 
         if(event.currentTarget.checked) {
             tar.checked = false;
@@ -44,7 +47,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
             tar.disabled = false;
             gz.disabled = false;
             bz2.disabled = false;
-            passwordInput.value = '';
         }
     });
 
