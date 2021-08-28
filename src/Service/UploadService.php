@@ -2,7 +2,10 @@
 
 namespace Xatenev\Zippify\Service;
 
+use Exception;
+use FilesystemIterator;
 use phpMussel\Core\Scanner;
+use Psr\Log\LoggerInterface;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Slim\Psr7\UploadedFile;
@@ -10,7 +13,7 @@ use Slim\Psr7\UploadedFile;
 class UploadService
 {
 
-    public function __construct(private string $uploadDirectory, private Scanner $virusScanner)
+    public function __construct(private LoggerInterface $logger, private string $uploadDirectory, private Scanner $virusScanner)
     {
     }
 
@@ -20,6 +23,7 @@ class UploadService
      *
      * @param UploadedFile[] $uploadedFiles file uploaded file to move
      * @return string directory name
+     * @throws Exception
      */
     public function moveUploadedFiles(array $uploadedFiles)
     {
@@ -45,6 +49,7 @@ class UploadService
      * @param string $directory sub-directory to place the file in
      * @param UploadedFile $uploadedFile file uploaded file to move
      * @return string filename of moved file
+     * @throws Exception
      */
     public function moveUploadedFile(string $directory, UploadedFile $uploadedFile)
     {
@@ -59,7 +64,7 @@ class UploadService
 
     public function remove(string $directory)
     {
-        $it = new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::SKIP_DOTS);
+        $it = new RecursiveDirectoryIterator($directory, FilesystemIterator::SKIP_DOTS);
         $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
         foreach ($files as $file) {
             if ($file->isDir()) {
@@ -76,8 +81,26 @@ class UploadService
      *
      * @param string $directory
      * @return bool If malicious data is found, returns true, else false
+     * @throws Exception
      */
-    public function virusScan(string $directory): bool {
-        return $this->virusScanner->scan($directory, 2);
+    public function virusScan(string $directory): bool
+    {
+
+        $result = false;
+        $it = new RecursiveDirectoryIterator($directory, FilesystemIterator::SKIP_DOTS);
+        $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
+        foreach ($files as $file) {
+            if ($file->isFile()) {
+                $result = $this->virusScanner->scan($file->getPathname(), 2);
+                if($result) {
+                    $key = bin2hex(random_bytes(QUARANTINE_KEY_LENGTH));
+                    $this->virusScanner->quarantine(file_get_contents($file->getPathname()), $key, $_SERVER['REMOTE_ADDR'], $key);
+                    $this->logger->alert(sprintf('Malicious data has been found, file(s) have been quarantined with key [%s]', $key));
+                    break;
+                }
+            }
+        }
+
+        return $result;
     }
 }

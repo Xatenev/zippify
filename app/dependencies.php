@@ -2,12 +2,26 @@
 
 use DI\Container;
 use GuzzleHttp\Client;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 use phpMussel\Core\Loader;
 use phpMussel\Core\Scanner;
 use Xatenev\Zippify\Service\ArchiveService;
 use Xatenev\Zippify\Service\UploadService;
 
 return function (Container $container) {
+    $container->set('logger', function (Container $c) {
+        $logger = new Logger(mb_strtolower(APPLICATION_NAME));
+        $logger->pushHandler(new StreamHandler(LOGS_DIR . 'info.log', Logger::INFO));
+        $logger->pushHandler(new StreamHandler(LOGS_DIR . 'warning.log', Logger::WARNING));
+        $logger->pushHandler(new StreamHandler(LOGS_DIR . 'alert.log', Logger::ALERT));
+        $logger->pushHandler(new StreamHandler(LOGS_DIR . 'critical.log', Logger::CRITICAL));
+
+        return $logger;
+    });
+    $container->set('httpClient', function (Container $c) {
+        return new Client();
+    });
     $container->set('virusScanner', function (Container $c) {
         $loader = new Loader(
             PHPMUSSEL_DIR . 'phpmussel.yml',
@@ -20,12 +34,9 @@ return function (Container $container) {
         return new Scanner($loader);
     });
     $container->set('uploadService', function (Container $c) {
-        return new UploadService(UPLOAD_DIR, $c->get('virusScanner'));
+        return new UploadService($c->get('logger'), UPLOAD_DIR, $c->get('virusScanner'));
     });
     $container->set('archiveService', function (Container $c) {
-        return new ArchiveService(OUT_DIR);
-    });
-    $container->set('httpClient', function (Container $c) {
-        return new Client();
+        return new ArchiveService($c->get('logger'), OUT_DIR);
     });
 };

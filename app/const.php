@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 
+define('APPLICATION_NAME', 'Zippify');
 define('DS', DIRECTORY_SEPARATOR);
 define('PS', '.');
 
@@ -16,5 +17,7 @@ define('PHPMUSSEL_DIR', realpath(ROOT_DIR . 'phpmussel') . DS);
 define('VENDOR_DIR', realpath(ROOT_DIR . 'vendor') . DS);
 define('UPLOAD_DIR', realpath(ROOT_DIR . 'upload') . DS);
 define('OUT_DIR', realpath(PUBLIC_DIR . 'out') . DS);
+define('LOGS_DIR', realpath(ROOT_DIR . 'logs') . DS);
 
 define('GENERATED_FILES_TOKEN_LENGTH', 16);
+define('QUARANTINE_KEY_LENGTH', 16);

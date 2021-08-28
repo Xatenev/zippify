@@ -4,12 +4,13 @@ namespace Xatenev\Zippify\Service;
 
 use Phar;
 use PharData;
+use Psr\Log\LoggerInterface;
 use ZipArchive;
 
 class ArchiveService
 {
 
-    public function __construct(private string $outDirectory)
+    public function __construct(private LoggerInterface $logger, private string $outDirectory)
     {
     }
 

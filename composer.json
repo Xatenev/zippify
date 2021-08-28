@@ -1,31 +1,33 @@
 {
-    "name": "xatenev/zippify",
-    "type": "project",
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Xatenev\\Zippify\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Xatenev",
-            "email": "xatenev@gmail.com"
-        }
-    ],
-    "scripts": {
-        "start": "Xatenev\\Zippify\\Command\\StartCommand::start",
-        "clean": "Xatenev\\Zippify\\Command\\CleanCommand::clean",
-        "update-signatures": "Xatenev\\Zippify\\Command\\UpdateSignaturesCommand::updateSignatures"
-    },
-    "require": {
-        "slim/slim": "4.*",
-        "slim/psr7": "^1.4",
-        "slim/php-view": "^3.1",
-        "php-di/php-di": "^6.3",
-        "guzzlehttp/guzzle": "^7.0",
-        "phpmussel/core": "^3.2",
-        "ext-zip": "*",
-        "ext-zlib": "*"
+  "name": "xatenev/zippify",
+  "type": "project",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Xatenev\\Zippify\\": "src/"
     }
+  },
+  "authors": [
+    {
+      "name": "Xatenev",
+      "email": "xatenev@gmail.com"
+    }
+  ],
+  "scripts": {
+    "start": "Xatenev\\Zippify\\Command\\StartCommand::start",
+    "clean": "Xatenev\\Zippify\\Command\\CleanCommand::clean",
+    "update-signatures": "Xatenev\\Zippify\\Command\\UpdateSignaturesCommand::updateSignatures"
+  },
+  "require": {
+    "slim/slim": "4.*",
+    "slim/psr7": "^1.4",
+    "slim/php-view": "^3.1",
+    "php-di/php-di": "^6.3",
+    "guzzlehttp/guzzle": "^7.0",
+    "phpmussel/core": "^3.2",
+    "monolog/monolog": "^2.3",
+    "ext-zip": "*",
+    "ext-zlib": "*",
+    "ext-mbstring": "*"
+  }
 }
