@@ -18,6 +18,7 @@ http://zippify.xatenev.com/
 git clone https://github.com/Xatenev/zippify.git
 cd zippify
 composer install
+composer update-signatures
 cd public
 php -S localhost:8888
 ```` 
