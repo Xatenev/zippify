@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             gz.disabled = false;
             password.disabled = true;
         } else {
+            gz.checked = false;
             gz.disabled = true;
             password.disabled = false;
         }

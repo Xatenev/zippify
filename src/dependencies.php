@@ -12,9 +12,9 @@ use Xatenev\Zippify\Service\UploadService;
 $container->set('virusScanner', function (Container $c) {
     $loader = new Loader(
         PHPMUSSEL_DIR . 'phpmussel.yml',
-        PHPMUSSEL_DIR. 'cache',
-        PHPMUSSEL_DIR. 'quarantine',
-        PHPMUSSEL_DIR. 'signatures',
+        PHPMUSSEL_DIR . 'cache',
+        PHPMUSSEL_DIR . 'quarantine',
+        PHPMUSSEL_DIR . 'signatures',
         VENDOR_DIR
     );
 
