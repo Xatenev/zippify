@@ -28,6 +28,7 @@
     "monolog/monolog": "^2.3",
     "ext-zip": "*",
     "ext-zlib": "*",
-    "ext-mbstring": "*"
+    "ext-mbstring": "*",
+    "composer/composer": "^2.1"
   }
 }

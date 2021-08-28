@@ -2,7 +2,6 @@
 
 namespace Xatenev\Zippify\Command;
 
-use Composer\Installer\PackageEvent;
 use Composer\Script\Event;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Utils;
@@ -53,12 +52,12 @@ class UpdateSignaturesCommand
 
     const SIGNATURES_URL = 'https://github.com/phpMussel/Signatures/blob/master/clamav/%s?raw=true';
 
-    public static function updateSignatures(Event $event)
+    public static function updateSignatures()
     {
         require_once __DIR__ . '/../../app/const.php';
         $client = new Client();
 
-        foreach(self::SIGNATURES as $signature) {
+        foreach (self::SIGNATURES as $signature) {
             $url = sprintf(self::SIGNATURES_URL, $signature . '.gz?raw=true');
             $filename = sprintf(ROOT_DIR . 'phpmussel' . DS . 'signatures' . DS . '%s', $signature . '.gz');
 

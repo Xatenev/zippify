@@ -3,7 +3,6 @@
 namespace Xatenev\Zippify\Command;
 
 use Composer\Script\Event;
-use Composer\Installer\PackageEvent;
 
 /**
  * Starts the application

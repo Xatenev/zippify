@@ -20,7 +20,7 @@ class CleanCommand
         'gitkeep'
     ];
 
-    public static function clean(Event $event)
+    public static function clean()
     {
         require_once __DIR__ . '/../../app/const.php';
 
