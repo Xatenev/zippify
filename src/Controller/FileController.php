@@ -6,6 +6,7 @@ use Slim\App;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 use Slim\Routing\RouteCollectorProxy;
+use Xatenev\Zippify\Model\ViewSettings;
 use Xatenev\Zippify\Service\ArchiveService;
 use Xatenev\Zippify\Service\UploadService;
 
@@ -17,37 +18,30 @@ return function (App $app) {
             /** @var ArchiveService $archiveService */
             $archiveService = $this->get('archiveService');
 
-            $settings = $request->getParsedBody();
-            $password = $settings['password'];
-            $tar = json_decode($settings['tar']);
-            $gz = json_decode($settings['gz']);
-            $bz2 = json_decode($settings['bz2']);
-            $share = json_decode($settings['share']);
-            $virus = json_decode('true');
-
+            $settings = ViewSettings::createFromArray($request->getParsedBody()['settings']);
             $uploadedFiles = $request->getUploadedFiles();
             $directory = $uploadService->moveUploadedFiles($uploadedFiles['file']);
 
-            if ($virus && $uploadService->virusScan($directory)) {
+            if ($settings->hasVirus() && $uploadService->virusScan($directory)) {
                 $uploadService->remove($directory);
                 return $response->withStatus(400, 'Malicious data detected');
             }
 
-            if ($tar) {
+            if ($settings->hasTar()) {
                 $archive = $archiveService->tar($directory);
 
-                if ($gz) {
+                if ($settings->hasGz()) {
                     $archive = $archiveService->gz($archive);
                 }
 
-                if($bz2) {
+                if($settings->hasBz2()) {
                     $archive = $archiveService->bz2($archive);
                 }
             } else {
                 $archive = $archiveService->zip($directory);
 
-                if (strlen($password) > 0) {
-                    $archiveService->password($archive, $password);
+                if (strlen($settings->getPasswordInput()) > 0) {
+                    $archiveService->password($archive, $settings->getPasswordInput());
                 }
             }
 

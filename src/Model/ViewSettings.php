@@ -8,19 +8,49 @@ class ViewSettings
     private bool $gz = false;
     private bool $bz2 = false;
     private bool $password = false;
+    private string $passwordInput = '';
     private bool $share = false;
     private bool $virus = false;
-
 
     public static function createFromRoute(string $route): ViewSettings
     {
         $class = new static();
-        $class->setTar(str_contains($route, 'tar'));
-        $class->setGz(str_contains($route, 'gz'));
-        $class->setBz2(str_contains($route, 'bz2'));
-        $class->setPassword(str_contains($route, 'password'));
-        $class->setShare(str_contains($route, 'share'));
-        $class->setVirus(str_contains($route, 'virus'));
+        $hasTar = str_contains($route, 'tar');
+        $hasGz = str_contains($route, 'gz');
+        $hasBz2 = str_contains($route, 'bz2');
+        $hasPassword = str_contains($route, 'password');
+        $hasShare = str_contains($route, 'share');
+        $hasVirus = str_contains($route, 'virus');
+
+        $class->setTar($hasTar || $hasGz || $hasBz2);
+        $class->setGz($hasGz);
+        $class->setBz2(!$hasGz && $hasBz2);
+        $class->setPassword(!$hasTar && !$hasGz && !$hasBz2 && $hasPassword);
+        $class->setShare($hasShare);
+        $class->setVirus($hasVirus);
+
+        return $class;
+    }
+
+    public static function createFromArray(array $settings): ViewSettings
+    {
+        $class = new static();
+
+        $hasTar = isset($settings['tar']);
+        $hasGz = isset($settings['gz']);
+        $hasBz2 = isset($settings['bz2']);
+        $hasPassword = isset($settings['password']);
+        $hasShare = isset($settings['share']);
+        $hasVirus = isset($settings['virus']);
+        $passwordInput = $settings['password-input'] ?? '';
+
+        $class->setTar($hasTar || $hasGz || $hasBz2);
+        $class->setGz($hasGz);
+        $class->setBz2(!$hasGz && $hasBz2);
+        $class->setPassword(!$hasTar && !$hasGz && !$hasBz2 && $hasPassword);
+        $class->setPasswordInput($passwordInput);
+        $class->setShare($hasShare);
+        $class->setVirus($hasVirus);
 
         return $class;
     }
@@ -95,6 +125,22 @@ class ViewSettings
     public function setPassword(bool $password): void
     {
         $this->password = $password;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPasswordInput(): string
+    {
+        return $this->passwordInput;
+    }
+
+    /**
+     * @param string $passwordInput
+     */
+    public function setPasswordInput(string $passwordInput): void
+    {
+        $this->passwordInput = $passwordInput;
     }
 
     /**

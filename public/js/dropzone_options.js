@@ -3,14 +3,6 @@ Dropzone.options.zippifyUpload = {
     autoProcessQueue: false,
     createImageThumbnails: false,
     uploadMultiple: true,
-    sending: function(file, xhr, formData) {
-        formData.append('password', document.querySelector('#settings-password-input').value);
-        formData.append('tar', document.querySelector('#settings-tar').checked);
-        formData.append('gz', document.querySelector('#settings-gz').checked);
-        formData.append('bz2', document.querySelector('#settings-bz2').checked);
-        formData.append('virus', document.querySelector('#settings-virus').checked);
-        formData.append('share', document.querySelector('#settings-share').checked);
-    },
     addedfiles: function() {
         // Hide dropzone
         const dropzone = document.querySelector('.dropzone');
