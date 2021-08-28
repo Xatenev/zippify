@@ -36,18 +36,18 @@ composer start -- 9999
 - [x] cleanup file script
 - [x] dev-experience composer scripts (start server, clean files etc.)
 - [x] re-adjust settings animation, clicking too fast breaks animation
-  
-- [ ] virus checking (doesn't work in a way that makes sense for the user, test out phpmussel
+- [x] virus checking
+- [x] logging
+- [x] more compression methods (.gz, .bzip2)
+
+- [ ] google lighthouse report
 - [ ] phpdoc
 - [ ] testing
 - [ ] success/error messages after upload
 - [ ] keep original file names inside the zip/tar (need db-mapping for this first)
 - [ ] replace const.php with proper dependency injection
-- [ ] logging
 - [ ] help dialogue that explains keyboard navigation and bookmark functionality to the user (its possible to add a route like /targz as browser bookmark to automatically open the page with selected 'tar' and 'gz' settings), curl usage
-- [ ] html validator check
 - [ ] frontend lib management (npm/bower...)
-- [ ] more compression methods (.gz is implemented, bzip2 can still be added)
 - [ ] keyboard navigation
 - [ ] save generated zips in db to make sharing with friends possible
 - [ ] upload limits (file size, file count)
