@@ -1,3 +1,11 @@
+<?php
+
+use Xatenev\Zippify\Model\ViewSettings;
+
+/** @var $settings ViewSettings */
+$settings = $this->getAttribute('settings');
+?>
+
 <html lang="en">
 <head>
     <title>Zippify</title>
@@ -27,46 +35,58 @@
             <div class="inner">
                 <h3>Zip all your files instantly</h3>
                 <h1>Zippify</h1>
-                <form action="/upload" class="dropzone needsclick dz-clickable <?= $settings ? 'expanded' : '' ?>"
+                <form action="/upload"
+                      class="dropzone needsclick dz-clickable <?= $settings->hasAny() ? 'expanded' : '' ?>"
                       id="zippify-upload">
                     <div class="dz-message needsclick">
                         <button type="button" class="dz-button">Drop files here or click to upload</button>
                     </div>
 
-                    <div class="settings-menu <?= $settings ? '' : 'hidden' ?>">
+                    <div class="settings-menu <?= $settings->hasAny() ? '' : 'hidden' ?>">
                         <hr>
                         <div class="checkbox-group">
                             <div>
                                 <div>
                                     <input type="checkbox" name="settings"
-                                           id="settings-tar" <?= $tar ? 'checked' : '' ?> <?= !$tar && $password ? 'disabled' : '' ?>>
+                                           id="settings-tar" <?= $settings->hasTar() ? 'checked' : '' ?> <?= !$settings->hasTar() && $settings->hasPassword() ? 'disabled' : '' ?>>
                                     <label for="settings-tar">tar<i class="fas fa-file-archive"></i></label>
                                 </div>
                                 <div>
-                                    <input type="checkbox" name="settings" id="settings-gz" <?= $gz ? 'checked' : '' ?> <?= !$tar ? 'disabled' : '' ?>>
+                                    <input type="checkbox" name="settings"
+                                           id="settings-gz" <?= $settings->hasGz() ? 'checked' : '' ?> <?= !$settings->hasTar() ? 'disabled' : '' ?>>
                                     <label for="settings-gz">.gz<i class="fas fa-archive"></i></label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="settings"
+                                           id="settings-bz2" <?= $settings->hasBz2() ? 'checked' : '' ?> <?= !$settings->hasTar() ? 'disabled' : '' ?>>
+                                    <label for="settings-bz2">.bz2<i class="fas fa-archive"></i></label>
                                 </div>
                             </div>
                             <div>
                                 <div>
                                     <input type="checkbox" name="settings"
-                                           id="settings-password" <?= !$tar && $password ? 'checked' : '' ?> <?= $tar ? 'disabled' : '' ?>>
+                                           id="settings-password" <?= !$settings->hasTar() && $settings->hasPassword() ? 'checked' : '' ?> <?= $settings->hasTar() ? 'disabled' : '' ?>>
                                     <label for="settings-password">password<i class="fas fa-lock"></i></label>
                                 </div>
-                                <div class="password-input <?= !$tar && $password ? '' : 'hidden' ?>">
+                                <div class="password-input <?= !$settings->hasTar() && $settings->hasPassword() ? '' : 'hidden' ?>">
                                     <input type="text" id="settings-password-input" name="password">
                                 </div>
                                 <div>
                                     <input type="checkbox" name="settings"
-                                           id="settings-share" <?= $share ? 'checked' : '' ?>>
+                                           id="settings-share" <?= $settings->hasShare() ? 'checked' : '' ?>>
                                     <label for="settings-share">share<i class="fas fa-share-alt"></i></label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="settings"
+                                           id="settings-virus" <?= $settings->hasVirus() ? 'checked' : '' ?>>
+                                    <label for="settings-virus">virus<i class="fas fa-shield-virus"></i></label>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="settings open <?= $settings ? 'close' : '' ?> hvr-pulse-grow">
-                        <i class="fas <?= $settings ? 'fa-times' : 'fa-wrench' ?>"></i>
+                    <div class="settings open <?= $settings->hasAny() ? 'close' : '' ?> hvr-pulse-grow">
+                        <i class="fas <?= $settings->hasAny() ? 'fa-times' : 'fa-wrench' ?>"></i>
                     </div>
 
                     <div class="loading">

@@ -27,7 +27,7 @@ class UpdateSignaturesCommand
 
     public static function updateSignatures(Event $event)
     {
-        require_once __DIR__ . '/../const.php';
+        require_once __DIR__ . '/../../app/const.php';
         $client = new Client();
 
         foreach(self::SIGNATURES as $signature) {

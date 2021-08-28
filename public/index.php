@@ -7,13 +7,14 @@ use DI\Container;
 require __DIR__ . '/../vendor/autoload.php';
 
 $container = new Container();
-AppFactory::setContainer($container);
-$app = AppFactory::create();
+$app = AppFactory::createFromContainer($container);
 
-// Register routes
+require_once __DIR__ . '/../app/const.php';
 
-require_once __DIR__ . '/../src/const.php';
-require_once SRC_DIR . 'dependencies.php';
-require_once SRC_DIR . 'controller.php';
+$dependencies = require_once __DIR__ . '/../app/dependencies.php';
+$dependencies($container);
+
+$controller = require_once __DIR__ . '/../app/controller.php';
+$controller($app);
 
 $app->run();

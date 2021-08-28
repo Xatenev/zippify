@@ -22,7 +22,7 @@ class CleanCommand
 
     public static function clean(Event $event)
     {
-        require_once __DIR__ . '/../const.php';
+        require_once __DIR__ . '/../../app/const.php';
 
         // Remove /upload folder
         $directoryIterator = new RecursiveDirectoryIterator(UPLOAD_DIR, FilesystemIterator::SKIP_DOTS);

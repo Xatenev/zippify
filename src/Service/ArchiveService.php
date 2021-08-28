@@ -28,6 +28,12 @@ class ArchiveService
         return $archive->compress(Phar::GZ);
     }
 
+    public function bz2(PharData $archive): PharData
+    {
+        $archive->setMetadata(['archiveFileName' => $archive->getMetadata()['archiveFileName'] . '.bz2']);
+        return $archive->compress(Phar::BZ2);
+    }
+
     public function remove(ZipArchive|PharData $archive): bool
     {
         if ($archive instanceof ZipArchive) {
