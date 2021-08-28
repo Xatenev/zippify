@@ -14,14 +14,19 @@
     height: 750px;
 }
 
-.dropzone .settings {
-    align-self: flex-end;
-    color: #fff;
+.dropzone .help {
+    align-self: flex-start;
     cursor: pointer;
     margin-top: auto;
 }
 
-.dropzone .settings i {
+.dropzone .settings {
+    align-self: flex-end;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.dropzone .help i, .dropzone .settings i {
     border: 2px dotted #8F4066;
     border-radius: 50%;
     padding: 10px;
@@ -32,22 +37,14 @@
     height: 46px;
 }
 
+.dropzone .buttons {
+    display: flex;
+    margin-top: auto;
+    width: 100%;
+}
+
 .dropzone .settings.close i {
     padding: 10px 13px 10px 14px;
-}
-
-.dropzone .close-settings {
-    align-self: flex-end;
-    color: #fff;
-    cursor: pointer;
-}
-
-.dropzone .close-settings i {
-    border: 2px dotted #8F4066;
-    border-radius: 50%;
-    padding: 10px;
-    color: #8F4066;
-    cursor: pointer;
 }
 
 .dropzone .settings-menu {

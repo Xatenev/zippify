@@ -2,7 +2,6 @@
 
 define('APPLICATION_NAME', 'Zippify');
 define('DS', DIRECTORY_SEPARATOR);
-define('PS', '.');
 
 define('BASE_URL', php_sapi_name() === 'cli' ? '' : (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/');
 define('OUT_URL', BASE_URL . 'out' . '/');

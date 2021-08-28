@@ -17,7 +17,9 @@ $settings = $this->getAttribute('settings');
     <script src="../../vendor/js/dropzone.js"></script>
     <script src="../../js/dropzone_options.js"></script>
     <script src="../../js/settings.js"></script>
+    <script src="../../js/help.js"></script>
     <link rel="stylesheet" href="../../vendor/css/dropzone.css">
+    <link rel="stylesheet" href="../../vendor/css/micromodal.css">
     <link rel="stylesheet" href="../../vendor/css/hover-min.css">
     <link rel="stylesheet" href="../../css/checkbox.css">
     <link rel="stylesheet" href="../../css/dropzone.css">
@@ -85,8 +87,14 @@ $settings = $this->getAttribute('settings');
                         </div>
                     </div>
 
-                    <div class="settings open <?= $settings->hasAny() ? 'close' : '' ?> hvr-pulse-grow">
-                        <i class="fas <?= $settings->hasAny() ? 'fa-times' : 'fa-wrench' ?>"></i>
+                    <div class="buttons">
+                        <div class="help hvr-pulse-grow">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+
+                        <div class="settings open <?= $settings->hasAny() ? 'close' : '' ?> hvr-pulse-grow">
+                            <i class="fas <?= $settings->hasAny() ? 'fa-times' : 'fa-wrench' ?>"></i>
+                        </div>
                     </div>
 
                     <div class="loading">
@@ -99,5 +107,37 @@ $settings = $this->getAttribute('settings');
         </div>
     </div>
 </section>
+
+<div class="modal micromodal-slide" id="help" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="help-title">
+            <header class="modal__header">
+                <h2 class="modal__title" id="help-title">
+                    Help
+                </h2>
+                <button class="modal__close hvr-pulse-grow" aria-label="Close modal" data-micromodal-close></button>
+            </header>
+            <main class="modal__content" id="help-content">
+                <h3>Set settings by url</h3>
+                <p>Settings can be passed directly via url, for example: <a class="highlight" target="_blank" href="https://zippify.com/targz">https://zippify.com/targz</a> would enable 'tar' and 'gz'.</p>
+
+                <h3>Keyboard navigation</h3>
+                <p><span class="highlight">Ctrl + D</span> - Save as bookmark</p>
+                <p><span class="highlight">H</span> - Toggle help</p>
+                <p><span class="highlight">U</span> - Open upload dialogue</p>
+                <p><span class="highlight">T</span> - Toggle tar</p>
+                <p><span class="highlight">G</span> - Toggle gz</p>
+                <p><span class="highlight">B</span> - Toggle bz2</p>
+                <p><span class="highlight">P</span> - Toggle password</p>
+                <p><span class="highlight">S</span> - Toggle share</p>
+                <p><span class="highlight">V</span> - Toggle virus</p>
+
+                <h3>Save as bookmark</h3>
+                <p>Different settings can be passed by url as described before, which allows you to save commonly used settings as bookmark in your browser.</p>
+            </main>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

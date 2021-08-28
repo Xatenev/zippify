@@ -12,10 +12,7 @@ use Xatenev\Zippify\Service\UploadService;
 return function (Container $container) {
     $container->set('logger', function (Container $c) {
         $logger = new Logger(mb_strtolower(APPLICATION_NAME));
-        $logger->pushHandler(new StreamHandler(LOGS_DIR . 'info.log', Logger::INFO));
-        $logger->pushHandler(new StreamHandler(LOGS_DIR . 'warning.log', Logger::WARNING));
-        $logger->pushHandler(new StreamHandler(LOGS_DIR . 'alert.log', Logger::ALERT));
-        $logger->pushHandler(new StreamHandler(LOGS_DIR . 'critical.log', Logger::CRITICAL));
+        $logger->pushHandler(new StreamHandler(LOGS_DIR . mb_strtolower(APPLICATION_NAME) . '.log', Logger::DEBUG));
 
         return $logger;
     });

@@ -57,8 +57,8 @@
 }
 
 .checkbox-group input:disabled + label::before, .checkbox-group input:disabled + label {
-    color: #808080;
-    border-color: #808080;
+    color: #408c8f;
+    border-color: #408c8f;
     text-decoration: line-through;
 }
 
