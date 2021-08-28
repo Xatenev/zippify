@@ -39,16 +39,15 @@ composer start -- 9999
 - [x] virus checking
 - [x] logging
 - [x] more compression methods (.gz, .bzip2)
+- [x] keyboard navigation
+- [x] help dialogue that explains keyboard navigation and bookmark functionality to the user (its possible to add a route like /targz as browser bookmark to automatically open the page with selected 'tar' and 'gz' settings), curl usage
 
 - [ ] google lighthouse report
 - [ ] phpdoc
 - [ ] testing
 - [ ] success/error messages after upload
 - [ ] keep original file names inside the zip/tar (need db-mapping for this first)
-- [ ] replace const.php with proper dependency injection
-- [ ] help dialogue that explains keyboard navigation and bookmark functionality to the user (its possible to add a route like /targz as browser bookmark to automatically open the page with selected 'tar' and 'gz' settings), curl usage
 - [ ] frontend lib management (npm/bower...)
-- [ ] keyboard navigation
 - [ ] save generated zips in db to make sharing with friends possible
 - [ ] upload limits (file size, file count)
 

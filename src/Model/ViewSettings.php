@@ -32,7 +32,7 @@ class ViewSettings
         return $class;
     }
 
-    public static function createFromArray(array $settings): ViewSettings
+    public static function createFromArray(?array $settings): ViewSettings
     {
         $class = new static();
 

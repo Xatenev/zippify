@@ -76,6 +76,22 @@
     text-decoration: none;
 }
 
+.modal__content .code {
+    background: rgba(0,0,0,0.3);
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.modal__content .copy {
+    float: right;
+    color: #8f7d40;
+    cursor: pointer;
+}
+
+.modal__content .copy i {
+    line-height: 1.625;
+}
+
 .modal__content h3 {
     width: 70%;
     margin-bottom: 10px;

@@ -120,17 +120,18 @@ $settings = $this->getAttribute('settings');
             </header>
             <main class="modal__content" id="help-modal-content">
                 <h3>Set settings by url</h3>
-                <p>Settings can be passed directly via url, for example: <a class="highlight" target="_blank" href="<?= BASE_URL . 'targz'?>"><?= BASE_URL . 'targz'?></a> would enable 'tar' and 'gz'.</p>
+                <p>Settings can be passed directly via url, for example: <a class="highlight" target="_blank" href="<?= BASE_URL . 'targz'?>"><?= BASE_URL . 'targz'?></a> would enable 'tar' and 'gz'. Commonly used settings can also be stored as <span class="highlight">bookmarks</span> in your browser.</p>
                 <br>
-                <p><span class="highlight">tar</span> - Enable tar</p>
-                <p><span class="highlight">gz</span> - Enable gz</p>
-                <p><span class="highlight">bz2</span> - Enable bz2</p>
-                <p><span class="highlight">password</span> - Enable password</p>
-                <p><span class="highlight">share</span> - Enable share</p>
-                <p><span class="highlight">virus</span> - Enable virus</p>
+                <p>Available settings: </p>
+                <p><span class="highlight">tar</span>,
+                    <span class="highlight">gz</span>,
+                    <span class="highlight">bz2</span>,
+                    <span class="highlight">password</span>,
+                    <span class="highlight">share</span>,
+                    <span class="highlight">virus</span>
+                </p>
 
                 <h3>Keyboard navigation</h3>
-                <p><span class="highlight">Ctrl + D</span> - Save as bookmark</p>
                 <p><span class="highlight">U</span> - Open upload dialogue</p>
                 <p><span class="highlight">H</span> - Toggle help</p>
                 <p><span class="highlight">T</span> - Toggle tar</p>
@@ -140,8 +141,10 @@ $settings = $this->getAttribute('settings');
                 <p><span class="highlight">S</span> - Toggle share</p>
                 <p><span class="highlight">V</span> - Toggle virus</p>
 
-                <h3>Save as bookmark</h3>
-                <p>Different settings can be passed by url as described before, which allows you to save commonly used settings as bookmark in your browser.</p>
+                <h3>Command line usage <a href="#" class="copy"><i class="fas fa-copy"></i></a></h3>
+                <p class="code">
+                    <span class="highlight">url</span>=$(<span class="highlight">curl</span> -F 'file[0]=@sample.txt' -F 'settings[tar]=1' <?= BASE_URL . 'file' ?>) &&
+                    <span class="highlight">wget</span> $url;</p>
             </main>
         </div>
     </div>
