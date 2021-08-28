@@ -16,6 +16,7 @@ $settings = $this->getAttribute('settings');
     <script src="../../vendor/js/micromodal.js"></script>
     <script src="../../vendor/js/dropzone.js"></script>
     <script src="../../js/dropzone_options.js"></script>
+    <script src="../../js/keyboard.js"></script>
     <script src="../../js/settings.js"></script>
     <script src="../../js/help.js"></script>
     <link rel="stylesheet" href="../../vendor/css/dropzone.css">
@@ -108,23 +109,30 @@ $settings = $this->getAttribute('settings');
     </div>
 </section>
 
-<div class="modal micromodal-slide" id="help" aria-hidden="true">
+<div class="modal micromodal-slide" id="help-modal" aria-hidden="true">
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="help-title">
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="help-modal-title">
             <header class="modal__header">
-                <h2 class="modal__title" id="help-title">
+                <h2 class="modal__title" id="help-modal-title">
                     Help
                 </h2>
                 <button class="modal__close hvr-pulse-grow" aria-label="Close modal" data-micromodal-close></button>
             </header>
-            <main class="modal__content" id="help-content">
+            <main class="modal__content" id="help-modal-content">
                 <h3>Set settings by url</h3>
-                <p>Settings can be passed directly via url, for example: <a class="highlight" target="_blank" href="https://zippify.com/targz">https://zippify.com/targz</a> would enable 'tar' and 'gz'.</p>
+                <p>Settings can be passed directly via url, for example: <a class="highlight" target="_blank" href="<?= BASE_URL . 'targz'?>"><?= BASE_URL . 'targz'?></a> would enable 'tar' and 'gz'.</p>
+                <br>
+                <p><span class="highlight">tar</span> - Enable tar</p>
+                <p><span class="highlight">gz</span> - Enable gz</p>
+                <p><span class="highlight">bz2</span> - Enable bz2</p>
+                <p><span class="highlight">password</span> - Enable password</p>
+                <p><span class="highlight">share</span> - Enable share</p>
+                <p><span class="highlight">virus</span> - Enable virus</p>
 
                 <h3>Keyboard navigation</h3>
                 <p><span class="highlight">Ctrl + D</span> - Save as bookmark</p>
-                <p><span class="highlight">H</span> - Toggle help</p>
                 <p><span class="highlight">U</span> - Open upload dialogue</p>
+                <p><span class="highlight">H</span> - Toggle help</p>
                 <p><span class="highlight">T</span> - Toggle tar</p>
                 <p><span class="highlight">G</span> - Toggle gz</p>
                 <p><span class="highlight">B</span> - Toggle bz2</p>

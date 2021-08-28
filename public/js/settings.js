@@ -35,31 +35,37 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if(event.currentTarget.checked) {
             tar.checked = false;
             gz.checked = false;
+            bz2.checked = false;
             tar.disabled = true;
             gz.disabled = true;
+            bz2.disabled = true;
             passwordInput.focus();
         } else {
             tar.disabled = false;
+            gz.disabled = false;
+            bz2.disabled = false;
             passwordInput.value = '';
         }
     });
 
     tar.addEventListener('change', function(event) {
         if(event.currentTarget.checked) {
-            gz.disabled = false;
-            bz2.disabled = false;
+            password.checked = false;
             password.disabled = true;
         } else {
+            gz.disabled = false;
+            bz2.disabled = false;
             gz.checked = false;
-            gz.disabled = true;
             bz2.checked = false;
-            bz2.disabled = true;
             password.disabled = false;
         }
     });
 
     gz.addEventListener('change', function(event) {
         if(event.currentTarget.checked) {
+            password.checked = false;
+            password.disabled = true;
+            tar.checked = true;
             bz2.disabled = true;
             bz2.checked = false;
         } else {
@@ -69,6 +75,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     bz2.addEventListener('change', function(event) {
         if(event.currentTarget.checked) {
+            password.checked = false;
+            password.disabled = true;
+            tar.checked = true;
             gz.disabled = true;
             gz.checked = false;
         } else {
