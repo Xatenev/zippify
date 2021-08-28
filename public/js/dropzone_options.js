@@ -1,5 +1,7 @@
 Dropzone.options.zippifyUpload = {
     url: '/file',
+    timeout: 120000,
+    parallelUploads: 256,
     autoProcessQueue: false,
     createImageThumbnails: false,
     uploadMultiple: true,

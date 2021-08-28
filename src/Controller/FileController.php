@@ -20,6 +20,7 @@ return function (App $app) {
 
             $settings = ViewSettings::createFromArray($request->getParsedBody()['settings']);
             $uploadedFiles = $request->getUploadedFiles();
+
             $directory = $uploadService->moveUploadedFiles($uploadedFiles['file']);
 
             if ($settings->hasVirus() && $uploadService->virusScan($directory)) {
