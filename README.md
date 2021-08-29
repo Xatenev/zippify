@@ -42,6 +42,7 @@ composer start -- 9999
 - [x] keyboard navigation
 - [x] help dialogue that explains keyboard navigation and bookmark functionality to the user (its possible to add a route like /targz as browser bookmark to automatically open the page with selected 'tar' and 'gz' settings), curl usage
 
+- [ ] automatically change url when settings are enabled/disabled
 - [ ] check if its possible to return the generated zip/tar with 3xx response code to make curl work without having to use wget
 - [ ] google lighthouse report
 - [ ] phpdoc
