@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Setup help button click listener, toggles modal display
     share.addEventListener('click', function (event) {
-        if(event.target === url) return;
+        if(event.target === url || event.target.classList.contains('fa-copy')) return;
         // Force download zip file
         const link = document.createElement("a");
         link.href = share.dataset.url;
