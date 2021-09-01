@@ -59,9 +59,11 @@ Clean all files
 - [x] keep original file names inside the zip/tar (need db-mapping for this first)
 - [x] save generated zips to make sharing possible
 - [x] automatically change url when settings are enabled/disabled
-- [x] Add clean command to remove expired files
+- [x] add clean command to remove expired files
+- [x] add force clean command to remove everything
   
-- [ ] Add force clean command to remove everything
+- [ ] seperate header into partial templates
+- [ ] cleanup
 - [ ] google lighthouse report
 - [ ] frontend lib management (npm/bower...)
 - [ ] upload limits (file size, file count)
