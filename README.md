@@ -62,6 +62,7 @@ Clean all files
 - [x] add clean command to remove expired files
 - [x] add force clean command to remove everything
   
+- [ ] header clickable
 - [ ] seperate header into partial templates
 - [ ] cleanup
 - [ ] google lighthouse report
