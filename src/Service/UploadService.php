@@ -68,6 +68,9 @@ class UploadService
     public function getMetaByToken(string $token)
     {
         $meta = file_get_contents($this->metaDirectory . $token . '.json');
+        if(!$meta) {
+            throw new RuntimeException();
+        }
         $meta = json_decode($meta, true);
         $meta['expiration'] = (new DateTime())->setTimestamp($meta['expiration']);
         return $meta;

@@ -69,6 +69,7 @@
     color: #408c8f;
     font-weight: 300;
     font-size: 0.75rem;
+    text-align: left;
 }
 
 .modal__content .highlight {

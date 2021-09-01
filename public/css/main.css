@@ -59,6 +59,11 @@ section#main {
     margin-left: -50vw;
 }
 
+.title {
+    text-decoration: none;
+    outline: none;
+}
+
 h1 {
     margin-top: 0.675rem;
     color: #FFFFFF;

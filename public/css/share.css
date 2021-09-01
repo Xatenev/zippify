@@ -12,20 +12,25 @@
 }
 
 #share > table td:first-child {
+    text-align: left;
     text-transform: uppercase;
     color: #8F4066;
     font-family: 'Inter', sans-serif;
     letter-spacing: 0.15rem;
-    font-size: 1.24em;
+    font-size: 0.875em;
+    line-height: 1.5em;
     padding: 5px 3vw 5px 0;
 }
 
 #share > table td:last-child {
+    line-height: 1.5em;
+    text-align: left;
     text-transform: uppercase;
     letter-spacing: 0.15rem;
-    font-size: 1.24em;
+    font-size: 0.875em;
     font-family: 'Inter', sans-serif;
     color: #8f7d40;
+    float:left;
 }
 
 #share > .download {

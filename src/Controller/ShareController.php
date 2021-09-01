@@ -2,6 +2,7 @@
 
 namespace Xatenev\Zippify\Controller;
 
+use RuntimeException;
 use Slim\App;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
@@ -16,7 +17,12 @@ return function (App $app) {
             /** @var UploadService $uploadService */
             $uploadService = $this->get('uploadService');
             $token = $args['token'];
-            $meta = $uploadService->getMetaByToken($token);
+
+            try {
+                $meta = $uploadService->getMetaByToken($token);
+            } catch(RuntimeException $e) {
+                return $response->withStatus(301)->withHeader('Location', '/');
+            }
 
             $renderer = new PhpRenderer(TEMPLATE_DIR, [
                 'token' => $meta['items'],
