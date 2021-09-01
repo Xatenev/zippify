@@ -73,3 +73,4 @@ Clean all files
 
 - [ ] decompress functionality (upload zip, get list of files inside. have to be careful here, zipbomb etc.)
 - [ ] set zip file name
+- [ ] set expire date
