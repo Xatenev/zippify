@@ -20,6 +20,7 @@
     "update-signatures": "Xatenev\\Zippify\\Command\\UpdateSignaturesCommand::updateSignatures"
   },
   "require": {
+    "ext-bz2": "*",
     "ext-zip": "*",
     "ext-zlib": "*",
     "ext-mbstring": "*",
