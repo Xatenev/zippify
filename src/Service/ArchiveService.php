@@ -25,14 +25,18 @@ class ArchiveService
         }
     }
 
-    public function gz(PharData $archive): PharData
+    public function gz(UploadMappingModel $uploadMapping, PharData $archive): PharData
     {
+        $uploadMapping->setType(UploadTypeEnum::TARGZ);
+
         $archive->setMetadata(['archiveFileName' => $archive->getMetadata()['archiveFileName'] . '.gz']);
         return $archive->compress(Phar::GZ);
     }
 
-    public function bz2(PharData $archive): PharData
+    public function bz2(UploadMappingModel $uploadMapping, PharData $archive): PharData
     {
+        $uploadMapping->setType(UploadTypeEnum::TARBZ2);
+
         $archive->setMetadata(['archiveFileName' => $archive->getMetadata()['archiveFileName'] . '.bz2']);
         return $archive->compress(Phar::BZ2);
     }

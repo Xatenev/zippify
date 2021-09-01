@@ -36,11 +36,11 @@ return function (App $app) {
                 $archive = $archiveService->tar($upload);
 
                 if ($settings->hasGz()) {
-                    $archive = $archiveService->gz($archive);
+                    $archive = $archiveService->gz($upload, $archive);
                 }
 
                 if ($settings->hasBz2()) {
-                    $archive = $archiveService->bz2($archive);
+                    $archive = $archiveService->bz2($upload, $archive);
                 }
             } else {
                 $archive = $archiveService->zip($upload);
