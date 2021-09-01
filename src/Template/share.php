@@ -42,7 +42,7 @@ $url = $this->getAttribute('url');
                             <td><?= $size / 4096 ?> MB</td>
                         </tr>
                         <tr>
-                            <td>Expires at:</td>
+                            <td>Expires:</td>
                             <td><?= $expiration->format('d.m.Y H:i') ?></td>
                         </tr>
                         <tr>
