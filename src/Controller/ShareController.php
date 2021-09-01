@@ -22,7 +22,7 @@ return function (App $app) {
                 'token' => $meta['items'],
                 'type' => $meta['type'],
                 'expiration' => $meta['expiration'],
-                'size' => $meta['size'],
+                'size' => number_format($meta['size'] / 1024 / 1024, 2),
                 'count' => $meta['count'],
                 'url' => OUT_URL . $token . '.' . $meta['type']
             ]);

@@ -24,9 +24,14 @@ class UploadService
      * @param LoggerInterface $logger
      * @param string $uploadDirectory
      * @param string $metaDirectory
+     * @param string $outDirectory
      * @param Scanner $virusScanner
      */
-    public function __construct(private LoggerInterface $logger, private string $uploadDirectory, private string $metaDirectory, private Scanner $virusScanner)
+    public function __construct(private LoggerInterface $logger,
+                                private string $uploadDirectory,
+                                private string $metaDirectory,
+                                private string $outDirectory,
+                                private Scanner $virusScanner)
     {
     }
 
@@ -49,7 +54,13 @@ class UploadService
 
     public function generateMeta(UploadMappingModel $uploadMapping)
     {
-        $meta = new UploadMetaModel($uploadMapping->getToken(), $uploadMapping->getType(), new DateTime('+1 week'), filesize($uploadMapping->getFilepath()), count($uploadMapping->getItems()));
+        $meta = new UploadMetaModel(
+            $uploadMapping->getToken(),
+            $uploadMapping->getType(),
+            new DateTime('+1 week'),
+            filesize($this->outDirectory . $uploadMapping->getToken() . '.' . $uploadMapping->getType()),
+            count($uploadMapping->getItems())
+        );
 
         file_put_contents($this->metaDirectory . $uploadMapping->getToken() . '.json', json_encode($meta));
     }

@@ -31,7 +31,7 @@ return function (Container $container) {
         return new Scanner($loader);
     });
     $container->set('uploadService', function (Container $c) {
-        return new UploadService($c->get('logger'), UPLOAD_DIR, META_DIR, $c->get('virusScanner'));
+        return new UploadService($c->get('logger'), UPLOAD_DIR, META_DIR, OUT_DIR, $c->get('virusScanner'));
     });
     $container->set('archiveService', function (Container $c) {
         return new ArchiveService($c->get('logger'), OUT_DIR);

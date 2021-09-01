@@ -39,7 +39,7 @@ $url = $this->getAttribute('url');
                         </tr>
                         <tr>
                             <td>Size:</td>
-                            <td><?= $size / 4096 ?> MB</td>
+                            <td><?= $size ?> MB</td>
                         </tr>
                         <tr>
                             <td>Expires on:</td>
