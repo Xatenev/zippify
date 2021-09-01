@@ -16,6 +16,7 @@
   "scripts": {
     "start": "Xatenev\\Zippify\\Command\\StartCommand::start",
     "clean": "Xatenev\\Zippify\\Command\\CleanCommand::clean",
+    "force-clean": "Xatenev\\Zippify\\Command\\ForceCleanCommand::forceClean",
     "update-signatures": "Xatenev\\Zippify\\Command\\UpdateSignaturesCommand::updateSignatures"
   },
   "require": {

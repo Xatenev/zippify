@@ -11,9 +11,9 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RuntimeException;
 use Slim\Psr7\UploadedFile;
-use Xatenev\Zippify\Model\UploadItem;
-use Xatenev\Zippify\Model\UploadMapping;
-use Xatenev\Zippify\Model\UploadMeta;
+use Xatenev\Zippify\Model\UploadItemModel;
+use Xatenev\Zippify\Model\UploadMappingModel;
+use Xatenev\Zippify\Model\UploadMetaModel;
 
 class UploadService
 {
@@ -34,12 +34,12 @@ class UploadService
      * Upload all files in given $uploadedFiles array.
      *
      * @param array $uploadedFiles
-     * @return UploadMapping
+     * @return UploadMappingModel
      * @throws Exception
      */
-    public function upload(array $uploadedFiles): UploadMapping
+    public function upload(array $uploadedFiles): UploadMappingModel
     {
-        $mapping = new UploadMapping();
+        $mapping = new UploadMappingModel();
         $mapping->setToken($this->generateUploadToken());
         $mapping->setFilepath($this->createUploadDirByToken($mapping->getToken()));
         $mapping->setItems($this->moveUploadedFiles($mapping->getFilepath(), $uploadedFiles));
@@ -47,9 +47,9 @@ class UploadService
         return $mapping;
     }
 
-    public function generateMeta(UploadMapping $uploadMapping)
+    public function generateMeta(UploadMappingModel $uploadMapping)
     {
-        $meta = new UploadMeta($uploadMapping->getToken(), $uploadMapping->getType(), new DateTime('+1 week'), filesize($uploadMapping->getFilepath()), count($uploadMapping->getItems()));
+        $meta = new UploadMetaModel($uploadMapping->getToken(), $uploadMapping->getType(), new DateTime('+1 week'), filesize($uploadMapping->getFilepath()), count($uploadMapping->getItems()));
 
         file_put_contents($this->metaDirectory . $uploadMapping->getToken() . '.json', json_encode($meta));
     }
@@ -136,7 +136,7 @@ class UploadService
      *
      * @param string $directory directory name
      * @param UploadedFile[] $uploadedFiles file uploaded file to move
-     * @return UploadItem[] uploaded items
+     * @return UploadItemModel[] uploaded items
      * @throws Exception
      */
     private function moveUploadedFiles(string $directory, array $uploadedFiles): array
@@ -157,9 +157,9 @@ class UploadService
      *
      * @param string $directory sub-directory to place the file in
      * @param UploadedFile $uploadedFile file uploaded file to move
-     * @return UploadItem filename of moved file
+     * @return UploadItemModel filename of moved file
      */
-    private function moveUploadedFile(string $directory, UploadedFile $uploadedFile): UploadItem
+    private function moveUploadedFile(string $directory, UploadedFile $uploadedFile): UploadItemModel
     {
 
         $filename = sprintf('%s.%0.8s',
@@ -169,6 +169,6 @@ class UploadService
 
         $uploadedFile->moveTo($directory . DS . $filename);
 
-        return new UploadItem($filename, $uploadedFile->getClientFilename());
+        return new UploadItemModel($filename, $uploadedFile->getClientFilename());
     }
 }

@@ -7,8 +7,8 @@ use Slim\App;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 use Slim\Routing\RouteCollectorProxy;
-use Xatenev\Zippify\Enum\UploadType;
-use Xatenev\Zippify\Model\ViewSettings;
+use Xatenev\Zippify\Enum\UploadTypeEnum;
+use Xatenev\Zippify\Model\ViewSettingsModel;
 use Xatenev\Zippify\Service\ArchiveService;
 use Xatenev\Zippify\Service\UploadService;
 
@@ -20,7 +20,7 @@ return function (App $app) {
             /** @var ArchiveService $archiveService */
             $archiveService = $this->get('archiveService');
 
-            $settings = ViewSettings::createFromArray($request->getParsedBody()['settings']);
+            $settings = ViewSettingsModel::createFromArray($request->getParsedBody()['settings']);
             $upload = $uploadService->upload($request->getUploadedFiles()['file']);
 
             if ($settings->hasVirus()) {
@@ -53,10 +53,10 @@ return function (App $app) {
             if ($settings->hasShare()) {
                 $uploadService->generateMeta($upload);
                 $response->getBody()->write(BASE_URL . 'share' . '/' . $upload->getToken());
-                return $response;
+            } else {
+                $response->getBody()->write(OUT_URL . $archiveService->name($archive));
             }
 
-            $response->getBody()->write(OUT_URL . $archiveService->name($archive));
 
             $uploadService->remove($upload->getFilepath());
             $archiveService->close($archive);

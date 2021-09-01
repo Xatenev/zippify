@@ -2,7 +2,7 @@
 
 namespace Xatenev\Zippify\Model;
 
-class UploadItem
+class UploadItemModel
 {
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Xatenev\Zippify\Model;
 
-class ViewSettings
+class ViewSettingsModel
 {
     private bool $tar = false;
     private bool $gz = false;
@@ -12,7 +12,7 @@ class ViewSettings
     private bool $share = false;
     private bool $virus = false;
 
-    public static function createFromRoute(string $route): ViewSettings
+    public static function createFromRoute(string $route): ViewSettingsModel
     {
         $class = new static();
         $hasTar = str_contains($route, 'tar');
@@ -32,7 +32,7 @@ class ViewSettings
         return $class;
     }
 
-    public static function createFromArray(?array $settings): ViewSettings
+    public static function createFromArray(?array $settings): ViewSettingsModel
     {
         $class = new static();
 

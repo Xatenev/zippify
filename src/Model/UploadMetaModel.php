@@ -6,7 +6,7 @@ use DateTime;
 use JetBrains\PhpStorm\ArrayShape;
 use JsonSerializable;
 
-class UploadMeta implements JsonSerializable
+class UploadMetaModel implements JsonSerializable
 {
     private string $token;
     private string $type;

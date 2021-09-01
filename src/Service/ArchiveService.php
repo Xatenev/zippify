@@ -5,8 +5,8 @@ namespace Xatenev\Zippify\Service;
 use Phar;
 use PharData;
 use Psr\Log\LoggerInterface;
-use Xatenev\Zippify\Enum\UploadType;
-use Xatenev\Zippify\Model\UploadMapping;
+use Xatenev\Zippify\Enum\UploadTypeEnum;
+use Xatenev\Zippify\Model\UploadMappingModel;
 use ZipArchive;
 
 class ArchiveService
@@ -46,9 +46,9 @@ class ArchiveService
         }
     }
 
-    public function tar(UploadMapping $uploadMapping): PharData
+    public function tar(UploadMappingModel $uploadMapping): PharData
     {
-        $uploadMapping->setType(UploadType::TAR);
+        $uploadMapping->setType(UploadTypeEnum::TAR);
 
         $filename = $uploadMapping->getToken() . '.tar';
         $fullyQualifiedName = $this->outDirectory . $filename;
@@ -63,9 +63,9 @@ class ArchiveService
         return $tar;
     }
 
-    public function zip(UploadMapping $uploadMapping): ZipArchive
+    public function zip(UploadMappingModel $uploadMapping): ZipArchive
     {
-        $uploadMapping->setType(UploadType::ZIP);
+        $uploadMapping->setType(UploadTypeEnum::ZIP);
 
         $zip = new ZipArchive();
         $filename = $uploadMapping->getToken() . '.zip';

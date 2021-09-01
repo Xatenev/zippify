@@ -1,8 +1,8 @@
 <?php
 
-use Xatenev\Zippify\Model\ViewSettings;
+use Xatenev\Zippify\Model\ViewSettingsModel;
 
-/** @var $settings ViewSettings */
+/** @var $settings ViewSettingsModel */
 $settings = $this->getAttribute('settings');
 ?>
 

@@ -2,7 +2,7 @@
 
 namespace Xatenev\Zippify\Enum;
 
-abstract class UploadType
+abstract class UploadTypeEnum
 {
     const ZIP = 'zip';
     const TAR = 'tar';

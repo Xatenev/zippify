@@ -2,7 +2,7 @@
 
 namespace Xatenev\Zippify\Model;
 
-class UploadMapping
+class UploadMappingModel
 {
 
     /**
@@ -29,12 +29,12 @@ class UploadMapping
     /**
      * Array of uploaded files.
      *
-     * @var UploadItem[]
+     * @var UploadItemModel[]
      */
     private array $items = [];
 
     /**
-     * @return UploadItem[]
+     * @return UploadItemModel[]
      */
     public function getItems(): array
     {
@@ -42,7 +42,7 @@ class UploadMapping
     }
 
     /**
-     * @param UploadItem[] $items
+     * @param UploadItemModel[] $items
      */
     public function setItems(array $items): void
     {
