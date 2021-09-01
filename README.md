@@ -42,18 +42,15 @@ composer start -- 9999
 - [x] more compression methods (.gz, .bzip2)
 - [x] keyboard navigation
 - [x] help dialogue that explains keyboard navigation and bookmark functionality to the user (its possible to add a route like /targz as browser bookmark to automatically open the page with selected 'tar' and 'gz' settings), curl usage
+- [x] keep original file names inside the zip/tar (need db-mapping for this first)
+- [x] save generated zips to make sharing possible
 
-- [ ] automatically change url when settings are enabled/disabled
-- [ ] check if its possible to return the generated zip/tar with 3xx response code to make curl work without having to use wget
+- [x] automatically change url when settings are enabled/disabled
 - [ ] google lighthouse report
-- [ ] phpdoc
-- [ ] testing
-- [ ] success/error messages after upload
-- [ ] keep original file names inside the zip/tar (need db-mapping for this first)
 - [ ] frontend lib management (npm/bower...)
-- [ ] save generated zips in db to make sharing with friends possible
 - [ ] upload limits (file size, file count)
 
 # Possible later enhancements
 
 - [ ] decompress functionality (upload zip, get list of files inside. have to be careful here, zipbomb etc.)
+- [ ] set zip file name
