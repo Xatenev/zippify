@@ -61,11 +61,11 @@ Clean all files
 - [x] automatically change url when settings are enabled/disabled
 - [x] add clean command to remove expired files
 - [x] add force clean command to remove everything
-  
-- [ ] header clickable
-- [ ] seperate header into partial templates
+- [x] header clickable
+- [x] seperate header into partial templates
+- [x] google lighthouse report
+
 - [ ] cleanup
-- [ ] google lighthouse report
 - [ ] frontend lib management (npm/bower...)
 - [ ] upload limits (file size, file count)
 
