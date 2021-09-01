@@ -40,7 +40,7 @@ $settings = $this->getAttribute('settings');
                 <h1>Zippify</h1>
                 <form action="/upload"
                       class="dropzone needsclick dz-clickable <?= $settings->hasAny() ? 'expanded' : '' ?>"
-                      id="zippify-upload">
+                      id="dropzone">
                     <div class="dz-message needsclick">
                         <button type="button" class="dz-button">Drop files here or click to upload</button>
                     </div>

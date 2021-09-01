@@ -2,67 +2,72 @@
 
 namespace Xatenev\Zippify\Service;
 
+use DateTime;
 use Exception;
 use FilesystemIterator;
 use phpMussel\Core\Scanner;
 use Psr\Log\LoggerInterface;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use RuntimeException;
 use Slim\Psr7\UploadedFile;
+use Xatenev\Zippify\Model\UploadItem;
+use Xatenev\Zippify\Model\UploadMapping;
+use Xatenev\Zippify\Model\UploadMeta;
 
 class UploadService
 {
 
-    public function __construct(private LoggerInterface $logger, private string $uploadDirectory, private Scanner $virusScanner)
+    /**
+     * UploadService constructor.
+     *
+     * @param LoggerInterface $logger
+     * @param string $uploadDirectory
+     * @param string $metaDirectory
+     * @param Scanner $virusScanner
+     */
+    public function __construct(private LoggerInterface $logger, private string $uploadDirectory, private string $metaDirectory, private Scanner $virusScanner)
     {
     }
 
     /**
-     * Creates a directory by given $directory and moves the uploaded files to the upload directory and
-     * assigns it a unique name to avoid overwriting an existing uploaded file.
+     * Upload all files in given $uploadedFiles array.
      *
-     * @param UploadedFile[] $uploadedFiles file uploaded file to move
-     * @return string directory name
+     * @param array $uploadedFiles
+     * @return UploadMapping
      * @throws Exception
      */
-    public function moveUploadedFiles(array $uploadedFiles)
+    public function upload(array $uploadedFiles): UploadMapping
     {
+        $mapping = new UploadMapping();
+        $mapping->setToken($this->generateUploadToken());
+        $mapping->setFilepath($this->createUploadDirByToken($mapping->getToken()));
+        $mapping->setItems($this->moveUploadedFiles($mapping->getFilepath(), $uploadedFiles));
 
-        $directory = bin2hex(random_bytes(GENERATED_FILES_TOKEN_LENGTH));
-        $fullyQualifiedDirectoryName = $this->uploadDirectory . $directory;
-        mkdir($fullyQualifiedDirectoryName);
-
-        foreach ($uploadedFiles as $file) {
-            if ($file->getError() === UPLOAD_ERR_OK) {
-                $this->moveUploadedFile($fullyQualifiedDirectoryName, $file);
-            }
-        }
-
-        return $fullyQualifiedDirectoryName;
+        return $mapping;
     }
 
+    public function generateMeta(UploadMapping $uploadMapping)
+    {
+        $meta = new UploadMeta($uploadMapping->getToken(), $uploadMapping->getType(), new DateTime('+1 week'), filesize($uploadMapping->getFilepath()), count($uploadMapping->getItems()));
+
+        file_put_contents($this->metaDirectory . $uploadMapping->getToken() . '.json', json_encode($meta));
+    }
+
+    public function getMetaByToken(string $token)
+    {
+        $meta = file_get_contents($this->metaDirectory . $token . '.json');
+        $meta = json_decode($meta, true);
+        $meta['expiration'] = (new DateTime())->setTimestamp($meta['expiration']);
+        return $meta;
+    }
 
     /**
-     * Moves the uploaded file to the upload directory and assigns it a unique name
-     * to avoid overwriting an existing uploaded file.
+     * Removes all files in given $directory.
      *
-     * @param string $directory sub-directory to place the file in
-     * @param UploadedFile $uploadedFile file uploaded file to move
-     * @return string filename of moved file
-     * @throws Exception
+     * @param string $directory
      */
-    public function moveUploadedFile(string $directory, UploadedFile $uploadedFile)
-    {
-        $extension = pathinfo($uploadedFile->getClientFilename(), PATHINFO_EXTENSION);
-        $basename = bin2hex(random_bytes(GENERATED_FILES_TOKEN_LENGTH));
-        $filename = sprintf('%s.%0.8s', $basename, $extension);
-
-        $uploadedFile->moveTo($directory . DS . $filename);
-
-        return $directory . DS . $filename;
-    }
-
-    public function remove(string $directory)
+    public function remove(string $directory): void
     {
         $it = new RecursiveDirectoryIterator($directory, FilesystemIterator::SKIP_DOTS);
         $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
@@ -73,6 +78,7 @@ class UploadService
                 unlink($file->getRealPath());
             }
         }
+
         rmdir($directory);
     }
 
@@ -80,27 +86,89 @@ class UploadService
      * Scan all files in the provided $directory.
      *
      * @param string $directory
-     * @return bool If malicious data is found, returns true, else false
-     * @throws Exception
+     * @throws RuntimeException If malicious data is found, throw RuntimeException
      */
-    public function virusScan(string $directory): bool
+    public function virusScan(string $directory): void
     {
-
-        $result = false;
         $it = new RecursiveDirectoryIterator($directory, FilesystemIterator::SKIP_DOTS);
         $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
         foreach ($files as $file) {
             if ($file->isFile()) {
-                $result = $this->virusScanner->scan($file->getPathname(), 2);
-                if($result) {
-                    $key = bin2hex(random_bytes(QUARANTINE_KEY_LENGTH));
+                if ($this->virusScanner->scan($file->getPathname(), 2)) {
+                    $key = bin2hex(openssl_random_pseudo_bytes(QUARANTINE_KEY_LENGTH));
                     $this->virusScanner->quarantine(file_get_contents($file->getPathname()), $key, $_SERVER['REMOTE_ADDR'], $key);
                     $this->logger->alert(sprintf('Malicious data has been found, file(s) have been quarantined with key [%s]', $key));
-                    break;
+                    throw new RuntimeException();
                 }
             }
         }
+    }
 
-        return $result;
+    /**
+     * Generate a single upload token.
+     *
+     * @return string
+     */
+    private function generateUploadToken(): string
+    {
+        return bin2hex(openssl_random_pseudo_bytes(GENERATED_FILES_TOKEN_LENGTH));
+    }
+
+    /**
+     * Create a directory by given $token for uploaded files.
+     *
+     * @param string $token
+     * @return string
+     */
+    private function createUploadDirByToken(string $token): string
+    {
+        if (!mkdir($this->uploadDirectory . $token)) {
+            $this->logger->alert(sprintf('Could not create upload directory for token [%s] and path [%s]', $token, $this->uploadDirectory . $token));
+            throw new RuntimeException();
+        }
+
+        return $this->uploadDirectory . $token . DS;
+    }
+
+    /**
+     * Creates a directory by given $directory and moves the uploaded files to the upload directory and
+     * assigns it a unique name to avoid overwriting an existing uploaded file.
+     *
+     * @param string $directory directory name
+     * @param UploadedFile[] $uploadedFiles file uploaded file to move
+     * @return UploadItem[] uploaded items
+     * @throws Exception
+     */
+    private function moveUploadedFiles(string $directory, array $uploadedFiles): array
+    {
+        $items = [];
+        foreach ($uploadedFiles as $file) {
+            if ($file->getError() === UPLOAD_ERR_OK) {
+                $items[] = $this->moveUploadedFile($directory, $file);
+            }
+        }
+
+        return $items;
+    }
+
+    /**
+     * Moves the uploaded file to the upload directory and assigns it a unique name
+     * to avoid overwriting an existing uploaded file.
+     *
+     * @param string $directory sub-directory to place the file in
+     * @param UploadedFile $uploadedFile file uploaded file to move
+     * @return UploadItem filename of moved file
+     */
+    private function moveUploadedFile(string $directory, UploadedFile $uploadedFile): UploadItem
+    {
+
+        $filename = sprintf('%s.%0.8s',
+            bin2hex(openssl_random_pseudo_bytes(GENERATED_FILES_TOKEN_LENGTH)),
+            pathinfo($uploadedFile->getClientFilename(), PATHINFO_EXTENSION)
+        );
+
+        $uploadedFile->moveTo($directory . DS . $filename);
+
+        return new UploadItem($filename, $uploadedFile->getClientFilename());
     }
 }

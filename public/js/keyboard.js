@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("DOMContentLoaded", function (event) {
     const dropzone = document.querySelector('.dropzone');
 
     const settingsButton = document.querySelector('.settings');
@@ -13,15 +13,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
         v: document.querySelector('input#settings-virus'),
     };
 
-    document.addEventListener('keypress', function(e) {
-        if(e.target !== document.querySelector('body')) return;
+    document.addEventListener('keypress', function (e) {
+        if (e.target !== document.querySelector('body')) return;
 
-        switch(e.key) {
+        switch (e.key) {
             case 'u':
                 dropzone.click();
                 break;
             case 'h':
                 helpButton.click();
+                break;
+            case 'e':
+                if (!dropzone.classList.contains('expanded')) {
+                    settingsButton.click();
+                }
                 break;
             case 't':
             case 'g':
@@ -29,11 +34,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
             case 'p':
             case 's':
             case 'v':
-                if(!dropzone.classList.contains('expanded')) {
+                if (!dropzone.classList.contains('expanded')) {
                     settingsButton.click();
                 }
 
-                if(!settings[e.key].disabled) {
+                if (!settings[e.key].disabled) {
                     const event = document.createEvent('HTMLEvents');
                     event.initEvent('change', false, true);
                     settings[e.key].checked = !settings[e.key].checked;

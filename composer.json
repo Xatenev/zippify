@@ -19,6 +19,10 @@
     "update-signatures": "Xatenev\\Zippify\\Command\\UpdateSignaturesCommand::updateSignatures"
   },
   "require": {
+    "ext-zip": "*",
+    "ext-zlib": "*",
+    "ext-mbstring": "*",
+    "ext-openssl": "*",
     "slim/slim": "4.*",
     "slim/psr7": "^1.4",
     "slim/php-view": "^3.1",
@@ -26,9 +30,6 @@
     "guzzlehttp/guzzle": "^7.0",
     "phpmussel/core": "^3.2",
     "monolog/monolog": "^2.3",
-    "ext-zip": "*",
-    "ext-zlib": "*",
-    "ext-mbstring": "*",
     "composer/composer": "^2.1"
   }
 }

@@ -1,8 +1,12 @@
 /.idea/
 
 /vendor/
-/upload/
-!/upload/.gitkeep
+
+/data/upload/
+!/data/upload/.gitkeep
+
+/data/meta/
+!/data/meta/.gitkeep
 
 /deployment/
 
@@ -12,11 +16,11 @@
 /logs/
 !/logs/.gitkeep
 
-/phpmussel/cache/
-!/phpmussel/cache/.gitkeep
+/data/phpmussel/cache/
+!/data/phpmussel/cache/.gitkeep
 
-/phpmussel/quarantine/
-!/phpmussel/quarantine/.gitkeep
+/data/phpmussel/quarantine/
+!/data/phpmussel/quarantine/.gitkeep
 
-/phpmussel/signatures/
-!/phpmussel/signatures/.gitkeep
+/data/phpmussel/signatures/
+!/data/phpmussel/signatures/.gitkeep

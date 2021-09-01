@@ -1,4 +1,4 @@
-Dropzone.options.zippifyUpload = {
+Dropzone.options.dropzone = {
     url: '/file',
     timeout: 120000,
     parallelUploads: 256,

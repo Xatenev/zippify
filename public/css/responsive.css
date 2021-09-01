@@ -5,8 +5,12 @@
         justify-content: center;
     }
 
-    .dropzone.expanded {
+    #dropzone.expanded {
         height: 500px;
+    }
+
+    #share {
+        padding: 60px;
     }
 
 }

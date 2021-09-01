@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     const settings = document.querySelector('.settings');
     const settingsIcon = document.querySelector('.settings.open i');
     const settingsMenu = document.querySelector('.settings-menu');
-    const dropzone = document.querySelector('.dropzone')
+    const dropzone = document.querySelector('#dropzone')
 
     const tar = document.querySelector('input#settings-tar');
     const gz = document.querySelector('input#settings-gz');

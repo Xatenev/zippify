@@ -1,0 +1,37 @@
+#share {
+    border: 2px solid #8F4066;
+    margin: 60px 0;
+    padding: 60px 20px;
+    border-radius: 4px;
+    max-width: 500px;
+    cursor: pointer;
+}
+
+#share > table {
+    margin-bottom: 50px;
+}
+
+#share > table td:first-child {
+    text-transform: uppercase;
+    color: #8F4066;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.15rem;
+    font-size: 1.24em;
+    padding: 5px 3vw 5px 0;
+}
+
+#share > table td:last-child {
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    font-size: 1.24em;
+    font-family: 'Inter', sans-serif;
+    color: #8f7d40;
+}
+
+#share > .download {
+    letter-spacing: 0.15rem;
+    font-family: 'Inter', sans-serif;
+    color: #8F4066;
+    font-weight: 300;
+    text-decoration: none;
+}

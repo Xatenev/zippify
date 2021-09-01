@@ -12,9 +12,11 @@ define('TEMPLATE_DIR', realpath(SRC_DIR . 'Template') . DS);
 define('CONTROLLER_DIR', realpath(SRC_DIR . 'Controller') . DS);
 
 define('PUBLIC_DIR', realpath(ROOT_DIR . 'public') . DS);
-define('PHPMUSSEL_DIR', realpath(ROOT_DIR . 'phpmussel') . DS);
 define('VENDOR_DIR', realpath(ROOT_DIR . 'vendor') . DS);
-define('UPLOAD_DIR', realpath(ROOT_DIR . 'upload') . DS);
+define('DATA_DIR', realpath(ROOT_DIR . 'data') . DS);
+define('PHPMUSSEL_DIR', realpath(DATA_DIR . 'phpmussel') . DS);
+define('META_DIR', realpath(DATA_DIR . 'meta') . DS);
+define('UPLOAD_DIR', realpath(DATA_DIR . 'upload') . DS);
 define('OUT_DIR', realpath(PUBLIC_DIR . 'out') . DS);
 define('LOGS_DIR', realpath(ROOT_DIR . 'logs') . DS);
 

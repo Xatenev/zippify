@@ -59,7 +59,7 @@ class UpdateSignaturesCommand
 
         foreach (self::SIGNATURES as $signature) {
             $url = sprintf(self::SIGNATURES_URL, $signature . '.gz?raw=true');
-            $filename = sprintf(ROOT_DIR . 'phpmussel' . DS . 'signatures' . DS . '%s', $signature . '.gz');
+            $filename = sprintf(PHPMUSSEL_DIR . 'signatures' . DS . '%s', $signature . '.gz');
 
             $resource = Utils::tryFopen($filename, 'wb');
             $stream = Utils::streamFor($resource);

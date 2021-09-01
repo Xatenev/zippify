@@ -18,6 +18,7 @@ http://zippify.xatenev.com/
 git clone https://github.com/Xatenev/zippify.git
 cd zippify
 composer install
+composer check-platform-reqs
 composer update-signatures
 composer start -- 9999
 ```` 

@@ -5,6 +5,8 @@ namespace Xatenev\Zippify\Service;
 use Phar;
 use PharData;
 use Psr\Log\LoggerInterface;
+use Xatenev\Zippify\Enum\UploadType;
+use Xatenev\Zippify\Model\UploadMapping;
 use ZipArchive;
 
 class ArchiveService
@@ -44,31 +46,29 @@ class ArchiveService
         }
     }
 
-    public function tar(string $directory): PharData
+    public function tar(UploadMapping $uploadMapping): PharData
     {
-        $filename = bin2hex(random_bytes(GENERATED_FILES_TOKEN_LENGTH)) . '.tar';
+        $uploadMapping->setType(UploadType::TAR);
+
+        $filename = $uploadMapping->getToken() . '.tar';
         $fullyQualifiedName = $this->outDirectory . $filename;
 
         $tar = new PharData($fullyQualifiedName);
         $tar->setMetadata(['archiveFileName' => $filename]);
 
-        $dir = new \RecursiveDirectoryIterator($directory);
-        $iterator = new \RecursiveIteratorIterator($dir);
-
-        foreach ($iterator as $file) {
-            $fName = $file->getFilename();
-            if ($fName !== '.' && $fName !== '..') {
-                $tar->addFile($file->getPathname(), $fName);
-            }
+        foreach ($uploadMapping->getItems() as $uploadItem) {
+            $tar->addFile($uploadMapping->getFilepath() . $uploadItem->getKey(), $uploadItem->getValue());
         }
 
         return $tar;
     }
 
-    public function zip(string $directory): ZipArchive
+    public function zip(UploadMapping $uploadMapping): ZipArchive
     {
+        $uploadMapping->setType(UploadType::ZIP);
+
         $zip = new ZipArchive();
-        $filename = bin2hex(random_bytes(GENERATED_FILES_TOKEN_LENGTH)) . '.zip';
+        $filename = $uploadMapping->getToken() . '.zip';
         $fullyQualifiedName = $this->outDirectory . $filename;
 
         if ($zip->open($fullyQualifiedName, ZipArchive::CREATE) !== TRUE) {
@@ -76,14 +76,8 @@ class ArchiveService
             exit("cannot open <$fullyQualifiedName>\n");
         }
 
-        $dir = new \RecursiveDirectoryIterator($directory);
-        $iterator = new \RecursiveIteratorIterator($dir);
-
-        foreach ($iterator as $file) {
-            $fName = $file->getFilename();
-            if ($fName !== '.' && $fName !== '..') {
-                $zip->addFile($file->getPathname(), $fName);
-            }
+        foreach ($uploadMapping->getItems() as $uploadItem) {
+            $zip->addFile($uploadMapping->getFilepath() . $uploadItem->getKey(), $uploadItem->getValue());
         }
 
         $zip->close();
