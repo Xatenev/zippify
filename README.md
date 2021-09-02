@@ -4,13 +4,21 @@ This tool allows you to download a generated zip/tar from multiple files.
 ![Zippify](https://github.com/xatenev/zippify/blob/master/github/Zippify.png?raw=true)
 
 ## Web
-Username: admin 
-
-Password: 123 
-
 http://zippify.xatenev.com/
 
-## Run dev
+## Features
+- Drag and drop functionality
+- Select different compression methods
+- Password protected archives
+- Settings can be stored as bookmarks, e.g. http://zippify.xatenev.com/passwordtargz
+- Share generated zips with friends
+- Full keyboard navigation (press `h` for help on keyboard navigation)
+- Virus check uploaded files
+- Curl usage available (press `h` for help on curl usage)
+
+## Development
+
+### Setup
 ````
 git clone https://github.com/Xatenev/zippify.git
 cd zippify
@@ -18,16 +26,9 @@ composer install
 composer check-platform-reqs
 composer update-signatures
 composer start -- 9999
-```` 
+````
 
-## Features
-- Drag and drop functionality
-- Select compression method
-- Password protected archives
-- Settings can be stored as bookmarks, e.g. http://zippify.xatenev.com/passwordtargz
-- Share generated zips with friends
-
-## Scripts
+### Scripts
 > composer start
 
 Start the webserver
@@ -44,33 +45,7 @@ Clean unnecessary files (those that have either not been created with sharing in
 
 Clean all files
 
-# Todo until v1.0
-
-- [x] responsive mobile view
-- [x] disable settings dependent on user input, e.g. tar + password doesn't work together
-- [x] cleanup file script
-- [x] dev-experience composer scripts (start server, clean files etc.)
-- [x] re-adjust settings animation, clicking too fast breaks animation
-- [x] virus checking
-- [x] logging
-- [x] more compression methods (.gz, .bzip2)
-- [x] keyboard navigation
-- [x] help dialogue that explains keyboard navigation and bookmark functionality to the user (its possible to add a route like /targz as browser bookmark to automatically open the page with selected 'tar' and 'gz' settings), curl usage
-- [x] keep original file names inside the zip/tar (need db-mapping for this first)
-- [x] save generated zips to make sharing possible
-- [x] automatically change url when settings are enabled/disabled
-- [x] add clean command to remove expired files
-- [x] add force clean command to remove everything
-- [x] header clickable
-- [x] seperate header into partial templates
-- [x] google lighthouse report
-
-- [ ] cleanup
-- [ ] frontend lib management (npm/bower...)
-- [ ] upload limits (file size, file count)
-
-# Possible later enhancements
-
+## Possible later enhancements
 - [ ] decompress functionality (upload zip, get list of files inside. have to be careful here, zipbomb etc.)
-- [ ] set zip file name
-- [ ] set expire date
+- [ ] set archive file name
+- [ ] set expire date (currently fixed 1 week)
