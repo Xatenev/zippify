@@ -10,7 +10,7 @@ http://zippify.xatenev.com/
 - Drag and drop functionality
 - Select different compression methods
 - Password protected archives
-- Settings can be stored as bookmarks, e.g. http://zippify.xatenev.com/passwordtargz
+- Settings can be stored as bookmarks, e.g. http://zippify.xatenev.com/targz
 - Share generated zips with friends
 - Full keyboard navigation (press `h` for help on keyboard navigation)
 - Virus check uploaded files
