@@ -83,7 +83,6 @@ Dropzone.options.dropzone = {
             close: true,
             gravity: "top", // `top` or `bottom`
             position: "right", // `left`, `center` or `right`
-            backgroundColor: "#8F4066",
             className: "toast",
             stopOnFocus: true, // Prevents dismissing of toast on hover
         }).showToast();

@@ -41,14 +41,15 @@ class UploadService
      * @param UploadedFile[] $uploadedFiles
      * @return bool
      */
-    public function check(array $uploadedFiles): bool {
+    public function check(array $uploadedFiles): bool
+    {
         $filesize = array_sum(array_map(fn($uploadedFile) => $uploadedFile->getSize() / (1024 * 1024), $uploadedFiles));
         $count = count($uploadedFiles);
 
-        if($filesize > 30) {
+        if ($filesize > 30) {
             return false;
         }
-        if($count > 64) {
+        if ($count > 64) {
             return false;
         }
 
