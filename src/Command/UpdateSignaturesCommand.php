@@ -2,12 +2,11 @@
 
 namespace Xatenev\Zippify\Command;
 
-use Composer\Script\Event;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Utils;
 
 /**
- * Updates the virus signatures required by phpmussel to check files for known malicious data
+ * Updates the virus signatures required by phpmussel to check files for known malicious data.
  *
  * Example:
  * `composer update-signatures`

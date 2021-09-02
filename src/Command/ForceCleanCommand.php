@@ -2,14 +2,12 @@
 
 namespace Xatenev\Zippify\Command;
 
-use Composer\Script\Event;
-use Composer\Installer\PackageEvent;
 use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
 /**
- * Cleans all upload and data folders
+ * Cleans all upload and data folders.
  *
  * Example:
  * `composer force-clean`
@@ -30,10 +28,10 @@ class ForceCleanCommand
         foreach ($recursiveIterator as $file) {
             $fullPath = $file->getPath() . DS . $file->getFilename();
 
-            if($file->isDir()) {
+            if ($file->isDir()) {
                 rmdir($fullPath);
             } else {
-                if(!in_array($file->getExtension(), self::WHITELIST, true)) {
+                if (!in_array($file->getExtension(), self::WHITELIST, true)) {
                     unlink($fullPath);
                 }
             }
@@ -45,10 +43,10 @@ class ForceCleanCommand
         foreach ($recursiveIterator as $file) {
             $fullPath = $file->getPath() . DS . $file->getFilename();
 
-            if($file->isDir()) {
+            if ($file->isDir()) {
                 rmdir($fullPath);
             } else {
-                if(!in_array($file->getExtension(), self::WHITELIST, true)) {
+                if (!in_array($file->getExtension(), self::WHITELIST, true)) {
                     unlink($fullPath);
                 }
             }
@@ -60,10 +58,10 @@ class ForceCleanCommand
         foreach ($recursiveIterator as $file) {
             $fullPath = $file->getPath() . DS . $file->getFilename();
 
-            if($file->isDir()) {
+            if ($file->isDir()) {
                 rmdir($fullPath);
             } else {
-                if(!in_array($file->getExtension(), self::WHITELIST, true)) {
+                if (!in_array($file->getExtension(), self::WHITELIST, true)) {
                     unlink($fullPath);
                 }
             }

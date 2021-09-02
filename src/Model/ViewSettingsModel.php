@@ -12,6 +12,12 @@ class ViewSettingsModel
     private bool $share = false;
     private bool $virus = false;
 
+    /**
+     * Create a ViewSettingsModel by given $route string.
+     *
+     * @param string $route
+     * @return ViewSettingsModel
+     */
     public static function createFromRoute(string $route): ViewSettingsModel
     {
         $class = new static();
@@ -32,6 +38,12 @@ class ViewSettingsModel
         return $class;
     }
 
+    /**
+     * Create a ViewSettingsModel from given $settings array.
+     *
+     * @param array|null $settings
+     * @return ViewSettingsModel
+     */
     public static function createFromArray(?array $settings): ViewSettingsModel
     {
         $class = new static();
@@ -56,6 +68,54 @@ class ViewSettingsModel
     }
 
     /**
+     * @param bool $tar
+     */
+    public function setTar(bool $tar): void
+    {
+        $this->tar = $tar;
+    }
+
+    /**
+     * @param bool $gz
+     */
+    public function setGz(bool $gz): void
+    {
+        $this->gz = $gz;
+    }
+
+    /**
+     * @param bool $bz2
+     */
+    public function setBz2(bool $bz2): void
+    {
+        $this->bz2 = $bz2;
+    }
+
+    /**
+     * @param bool $password
+     */
+    public function setPassword(bool $password): void
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * @param bool $share
+     */
+    public function setShare(bool $share): void
+    {
+        $this->share = $share;
+    }
+
+    /**
+     * @param bool $virus
+     */
+    public function setVirus(bool $virus): void
+    {
+        $this->virus = $virus;
+    }
+
+    /**
      * @return bool
      */
     public function hasAny(): bool
@@ -72,27 +132,11 @@ class ViewSettingsModel
     }
 
     /**
-     * @param bool $tar
-     */
-    public function setTar(bool $tar): void
-    {
-        $this->tar = $tar;
-    }
-
-    /**
      * @return bool
      */
     public function hasGz(): bool
     {
         return $this->gz;
-    }
-
-    /**
-     * @param bool $gz
-     */
-    public function setGz(bool $gz): void
-    {
-        $this->gz = $gz;
     }
 
     /**
@@ -104,27 +148,11 @@ class ViewSettingsModel
     }
 
     /**
-     * @param bool $bz2
-     */
-    public function setBz2(bool $bz2): void
-    {
-        $this->bz2 = $bz2;
-    }
-
-    /**
      * @return bool
      */
     public function hasPassword(): bool
     {
         return $this->password;
-    }
-
-    /**
-     * @param bool $password
-     */
-    public function setPassword(bool $password): void
-    {
-        $this->password = $password;
     }
 
     /**
@@ -152,14 +180,6 @@ class ViewSettingsModel
     }
 
     /**
-     * @param bool $share
-     */
-    public function setShare(bool $share): void
-    {
-        $this->share = $share;
-    }
-
-    /**
      * @return bool
      */
     public function hasSettings(): bool
@@ -181,13 +201,5 @@ class ViewSettingsModel
     public function hasVirus(): bool
     {
         return $this->virus;
-    }
-
-    /**
-     * @param bool $virus
-     */
-    public function setVirus(bool $virus): void
-    {
-        $this->virus = $virus;
     }
 }

@@ -15,7 +15,7 @@ class UploadMetaModel implements JsonSerializable
     private int $count;
 
     /**
-     * UploadMeta constructor.
+     * UploadMetaModel constructor.
      *
      * @param string $token
      * @param string $type

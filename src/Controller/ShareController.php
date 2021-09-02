@@ -20,7 +20,7 @@ return function (App $app) {
 
             try {
                 $meta = $uploadService->getMetaByToken($token);
-            } catch(RuntimeException $e) {
+            } catch (RuntimeException $e) {
                 return $response->withStatus(301)->withHeader('Location', '/');
             }
 
@@ -33,7 +33,7 @@ return function (App $app) {
                 'url' => OUT_URL . $token . '.' . $meta['type']
             ]);
 
-            if($meta['expiration']->getTimestamp() < time()) {
+            if ($meta['expiration']->getTimestamp() < time()) {
                 return $response->withStatus(301)->withHeader('Location', '/');
             }
 

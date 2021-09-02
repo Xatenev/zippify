@@ -1,0 +1,11 @@
+.toast {
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.15rem;
+    box-shadow: none !important;
+    font-size: 0.675em;
+    background: #8F4066 !important;
+}
+
+.toast .toast-close {
+    margin-left: 10px;
+}

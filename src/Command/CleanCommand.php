@@ -2,13 +2,12 @@
 
 namespace Xatenev\Zippify\Command;
 
-use DateTime;
 use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
 /**
- * Cleans all unnecessary files in upload and data folders
+ * Cleans all unnecessary files in upload and data folders.
  *
  * Example:
  * `composer clean`
@@ -67,7 +66,7 @@ class CleanCommand
                 $file->isFile()
                 && !in_array($file->getExtension(), self::WHITELIST, true)
                 && (in_array($token, $remove)
-                || (!in_array($token, $remove) && !in_array($token, $keep)))
+                    || (!in_array($token, $remove) && !in_array($token, $keep)))
             ) {
                 if (!in_array($file->getExtension(), self::WHITELIST, true)) {
                     unlink($fullPath);

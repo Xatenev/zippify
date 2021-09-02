@@ -9,8 +9,7 @@ require_once 'Partials/header.php'; ?>
 
 <h3>Zip all your files instantly</h3>
 <a class="title" href="/"><h1>Zippify</h1></a>
-<form action="/upload"
-      class="dropzone needsclick dz-clickable <?= $settings->hasAny() ? 'expanded' : '' ?>"
+<form action="/upload" class="dropzone needsclick dz-clickable <?= $settings->hasAny() ? 'expanded' : '' ?>"
       id="dropzone">
     <div class="dz-message needsclick">
         <button type="button" class="dz-button">Drop files here or click to upload</button>

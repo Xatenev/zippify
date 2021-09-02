@@ -9,7 +9,10 @@
             </header>
             <div class="modal__content" id="help-modal-content">
                 <h3>Set settings by url</h3>
-                <p>Settings can be passed directly via url, for example: <a class="highlight" target="_blank" href="<?= BASE_URL . 'targz'?>"><?= BASE_URL . 'targz'?></a> would enable 'tar' and 'gz'. Commonly used settings can also be stored as <span class="highlight">bookmarks</span> in your browser.</p>
+                <p>Settings can be passed directly via url, for example: <a class="highlight" target="_blank"
+                                                                            href="<?= BASE_URL . 'targz' ?>"><?= BASE_URL . 'targz' ?></a>
+                    would enable 'tar' and 'gz'. Commonly used settings can also be stored as <span class="highlight">bookmarks</span>
+                    in your browser.</p>
                 <br>
                 <p>Available settings: </p>
                 <p><span class="highlight">tar</span>,
@@ -32,7 +35,8 @@
 
                 <h3>Command line usage <a href="#" class="copy"><i class="fas fa-copy"></i></a></h3>
                 <p class="code">
-                    <span class="highlight">url</span>=$(<span class="highlight">curl</span> -F 'file[0]=@sample.txt' -F 'settings[tar]=1' <?= BASE_URL . 'file' ?>) &&
+                    <span class="highlight">url</span>=$(<span class="highlight">curl</span> -F 'file[0]=@sample.txt' -F
+                    'settings[tar]=1' <?= BASE_URL . 'file' ?>) &&
                     <span class="highlight">wget</span> $url;</p>
             </div>
         </div>

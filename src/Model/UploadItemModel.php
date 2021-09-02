@@ -6,17 +6,6 @@ class UploadItemModel
 {
 
     /**
-     * UploadItem constructor.
-     *
-     * @param string $key
-     * @param string $value
-     */
-    public function __construct(string $key, string $value) {
-        $this->key = $key;
-        $this->value = $value;
-    }
-
-    /**
      * Generated token file name.
      *
      * @var string
@@ -29,6 +18,18 @@ class UploadItemModel
      * @var string
      */
     private string $value;
+
+    /**
+     * UploadItemModel constructor.
+     *
+     * @param string $key
+     * @param string $value
+     */
+    public function __construct(string $key, string $value)
+    {
+        $this->key = $key;
+        $this->value = $value;
+    }
 
     /**
      * @return string

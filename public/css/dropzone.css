@@ -14,6 +14,16 @@
     height: 750px;
 }
 
+#dropzone .hint {
+    margin-top: 20px;
+    text-transform: uppercase;
+    color: #8F4066;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.15rem;
+    font-size: 0.875em;
+    line-height: 1.625;
+}
+
 #dropzone .help {
     align-self: flex-start;
     cursor: pointer;

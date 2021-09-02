@@ -28,17 +28,37 @@ class UploadService
      * @param Scanner $virusScanner
      */
     public function __construct(private LoggerInterface $logger,
-                                private string $uploadDirectory,
-                                private string $metaDirectory,
-                                private string $outDirectory,
-                                private Scanner $virusScanner)
+                                private string          $uploadDirectory,
+                                private string          $metaDirectory,
+                                private string          $outDirectory,
+                                private Scanner         $virusScanner)
     {
+    }
+
+    /**
+     * Checks uploaded files for file size and file amount constraints.
+     *
+     * @param UploadedFile[] $uploadedFiles
+     * @return bool
+     */
+    public function check(array $uploadedFiles): bool {
+        $filesize = array_sum(array_map(fn($uploadedFile) => $uploadedFile->getSize() / (1024 * 1024), $uploadedFiles));
+        $count = count($uploadedFiles);
+
+        if($filesize > 30) {
+            return false;
+        }
+        if($count > 64) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
      * Upload all files in given $uploadedFiles array.
      *
-     * @param array $uploadedFiles
+     * @param UploadedFile[] $uploadedFiles
      * @return UploadMappingModel
      * @throws Exception
      */
@@ -50,72 +70,6 @@ class UploadService
         $mapping->setItems($this->moveUploadedFiles($mapping->getFilepath(), $uploadedFiles));
 
         return $mapping;
-    }
-
-    public function generateMeta(UploadMappingModel $uploadMapping)
-    {
-        $meta = new UploadMetaModel(
-            $uploadMapping->getToken(),
-            $uploadMapping->getType(),
-            new DateTime('+1 week'),
-            filesize($this->outDirectory . $uploadMapping->getToken() . '.' . $uploadMapping->getType()),
-            count($uploadMapping->getItems())
-        );
-
-        file_put_contents($this->metaDirectory . $uploadMapping->getToken() . '.json', json_encode($meta));
-    }
-
-    public function getMetaByToken(string $token)
-    {
-        $meta = file_get_contents($this->metaDirectory . $token . '.json');
-        if(!$meta) {
-            throw new RuntimeException();
-        }
-        $meta = json_decode($meta, true);
-        $meta['expiration'] = (new DateTime())->setTimestamp($meta['expiration']);
-        return $meta;
-    }
-
-    /**
-     * Removes all files in given $directory.
-     *
-     * @param string $directory
-     */
-    public function remove(string $directory): void
-    {
-        $it = new RecursiveDirectoryIterator($directory, FilesystemIterator::SKIP_DOTS);
-        $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
-        foreach ($files as $file) {
-            if ($file->isDir()) {
-                rmdir($file->getRealPath());
-            } else {
-                unlink($file->getRealPath());
-            }
-        }
-
-        rmdir($directory);
-    }
-
-    /**
-     * Scan all files in the provided $directory.
-     *
-     * @param string $directory
-     * @throws RuntimeException If malicious data is found, throw RuntimeException
-     */
-    public function virusScan(string $directory): void
-    {
-        $it = new RecursiveDirectoryIterator($directory, FilesystemIterator::SKIP_DOTS);
-        $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
-        foreach ($files as $file) {
-            if ($file->isFile()) {
-                if ($this->virusScanner->scan($file->getPathname(), 2)) {
-                    $key = bin2hex(openssl_random_pseudo_bytes(QUARANTINE_KEY_LENGTH));
-                    $this->virusScanner->quarantine(file_get_contents($file->getPathname()), $key, $_SERVER['REMOTE_ADDR'], $key);
-                    $this->logger->alert(sprintf('Malicious data has been found, file(s) have been quarantined with key [%s]', $key));
-                    throw new RuntimeException();
-                }
-            }
-        }
     }
 
     /**
@@ -184,5 +138,87 @@ class UploadService
         $uploadedFile->moveTo($directory . DS . $filename);
 
         return new UploadItemModel($filename, $uploadedFile->getClientFilename());
+    }
+
+    /**
+     * Generate meta file as json.
+     *
+     * @param UploadMappingModel $uploadMapping
+     */
+    public function generateMeta(UploadMappingModel $uploadMapping): void
+    {
+        $meta = new UploadMetaModel(
+            $uploadMapping->getToken(),
+            $uploadMapping->getType(),
+            new DateTime('+1 week'),
+            filesize($this->outDirectory . $uploadMapping->getToken() . '.' . $uploadMapping->getType()),
+            count($uploadMapping->getItems())
+        );
+
+        file_put_contents($this->metaDirectory . $uploadMapping->getToken() . '.json', json_encode($meta));
+    }
+
+    /**
+     * Get stored meta file as json by $token.
+     *
+     * @param string $token
+     * @return array
+     */
+    public function getMetaByToken(string $token): array
+    {
+        $meta = file_get_contents($this->metaDirectory . $token . '.json');
+        if (!$meta) {
+            throw new RuntimeException();
+        }
+        $meta = json_decode($meta, true);
+        $meta['expiration'] = (new DateTime())->setTimestamp($meta['expiration']);
+        return $meta;
+    }
+
+    /**
+     * Removes all files in given $directory.
+     *
+     * @param string $directory
+     */
+    public function remove(string $directory): void
+    {
+        $it = new RecursiveDirectoryIterator($directory, FilesystemIterator::SKIP_DOTS);
+        $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
+        foreach ($files as $file) {
+            if ($file->isDir()) {
+                rmdir($file->getRealPath());
+            } else {
+                unlink($file->getRealPath());
+            }
+        }
+
+        rmdir($directory);
+    }
+
+    /**
+     * Scan all files in the provided $directory.
+     *
+     * @param string $directory
+     * @return boolean true if everything is ok, false if something bad is found
+     */
+    public function virusScan(string $directory): bool
+    {
+        $it = new RecursiveDirectoryIterator($directory, FilesystemIterator::SKIP_DOTS);
+        $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
+        foreach ($files as $file) {
+            if ($file->isFile()) {
+                if ($this->virusScanner->scan($file->getPathname(), 2)) {
+                    $key = bin2hex(openssl_random_pseudo_bytes(QUARANTINE_KEY_LENGTH));
+                    $this->virusScanner->quarantine(file_get_contents($file->getPathname()), $key, $_SERVER['REMOTE_ADDR'], $key);
+                    $this->logger->alert(sprintf('Malicious data has been found, file(s) have been quarantined with key [%s]', $key));
+                    // This is important, if virusScanner is not manually unset here, phpmussel runs into an endless loop and dies after 120s timeout
+                    unset($this->virusScanner);
+
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }

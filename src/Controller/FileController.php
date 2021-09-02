@@ -7,7 +7,6 @@ use Slim\App;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 use Slim\Routing\RouteCollectorProxy;
-use Xatenev\Zippify\Enum\UploadTypeEnum;
 use Xatenev\Zippify\Model\ViewSettingsModel;
 use Xatenev\Zippify\Service\ArchiveService;
 use Xatenev\Zippify\Service\UploadService;
@@ -20,16 +19,16 @@ return function (App $app) {
             /** @var ArchiveService $archiveService */
             $archiveService = $this->get('archiveService');
 
+            if(!$uploadService->check($request->getUploadedFiles()['file'])) {
+                return $response->withStatus(400, 'Bad file input detected');
+            }
+
             $settings = ViewSettingsModel::createFromArray($request->getParsedBody()['settings']);
             $upload = $uploadService->upload($request->getUploadedFiles()['file']);
 
-            if ($settings->hasVirus()) {
-                try {
-                    $uploadService->virusScan($upload->getFilepath());
-                } catch (RuntimeException $e) {
-                    $uploadService->remove($upload->getFilepath());
-                    return $response->withStatus(400, 'Malicious data detected');
-                }
+            if ($settings->hasVirus() && !$uploadService->virusScan($upload->getFilepath())) {
+                $uploadService->remove($upload->getFilepath());
+                return $response->withStatus(400, 'Malicious data detected');
             }
 
             if ($settings->hasTar()) {
@@ -56,7 +55,6 @@ return function (App $app) {
             } else {
                 $response->getBody()->write(OUT_URL . $archiveService->name($archive));
             }
-
 
             $uploadService->remove($upload->getFilepath());
             $archiveService->close($archive);

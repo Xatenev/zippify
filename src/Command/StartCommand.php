@@ -5,7 +5,7 @@ namespace Xatenev\Zippify\Command;
 use Composer\Script\Event;
 
 /**
- * Starts the application
+ * Starts the application.
  *
  * Example:
  * `composer start -- 9999`

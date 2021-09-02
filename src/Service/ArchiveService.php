@@ -12,11 +12,23 @@ use ZipArchive;
 class ArchiveService
 {
 
+    /**
+     * ArchiveService constructor.
+     *
+     * @param LoggerInterface $logger
+     * @param string $outDirectory
+     */
     public function __construct(private LoggerInterface $logger, private string $outDirectory)
     {
     }
 
-    public function password(ZipArchive $zip, string $password)
+    /**
+     * Set $password for $zip.
+     *
+     * @param ZipArchive $zip
+     * @param string $password
+     */
+    public function password(ZipArchive $zip, string $password): void
     {
         $zip->setPassword($password);
 
@@ -25,6 +37,13 @@ class ArchiveService
         }
     }
 
+    /**
+     * Compress given $archive with gz.
+     *
+     * @param UploadMappingModel $uploadMapping
+     * @param PharData $archive
+     * @return PharData
+     */
     public function gz(UploadMappingModel $uploadMapping, PharData $archive): PharData
     {
         $uploadMapping->setType(UploadTypeEnum::TARGZ);
@@ -33,6 +52,13 @@ class ArchiveService
         return $archive->compress(Phar::GZ);
     }
 
+    /**
+     * Compress given $archive with bz2.
+     *
+     * @param UploadMappingModel $uploadMapping
+     * @param PharData $archive
+     * @return PharData
+     */
     public function bz2(UploadMappingModel $uploadMapping, PharData $archive): PharData
     {
         $uploadMapping->setType(UploadTypeEnum::TARBZ2);
@@ -41,6 +67,12 @@ class ArchiveService
         return $archive->compress(Phar::BZ2);
     }
 
+    /**
+     * Remove given $archive
+     *
+     * @param ZipArchive|PharData $archive
+     * @return bool
+     */
     public function remove(ZipArchive|PharData $archive): bool
     {
         if ($archive instanceof ZipArchive) {
@@ -50,6 +82,27 @@ class ArchiveService
         }
     }
 
+    /**
+     * Get name by $archive.
+     *
+     * @param ZipArchive|PharData $archive
+     * @return string
+     */
+    public function name(ZipArchive|PharData $archive): string
+    {
+        if ($archive instanceof ZipArchive) {
+            return substr($archive->filename, strrpos($archive->filename, DS) + 1);
+        } else {
+            return $archive->getMetadata()['archiveFileName'];
+        }
+    }
+
+    /**
+     * Generate tar.
+     *
+     * @param UploadMappingModel $uploadMapping
+     * @return PharData
+     */
     public function tar(UploadMappingModel $uploadMapping): PharData
     {
         $uploadMapping->setType(UploadTypeEnum::TAR);
@@ -67,6 +120,12 @@ class ArchiveService
         return $tar;
     }
 
+    /**
+     * Generate zip.
+     *
+     * @param UploadMappingModel $uploadMapping
+     * @return ZipArchive
+     */
     public function zip(UploadMappingModel $uploadMapping): ZipArchive
     {
         $uploadMapping->setType(UploadTypeEnum::ZIP);
@@ -90,21 +149,17 @@ class ArchiveService
         return $zip;
     }
 
-    public function name(ZipArchive|PharData $archive)
+    /**
+     * Close $archive.
+     *
+     * @param ZipArchive|PharData $archive
+     */
+    public function close(ZipArchive|PharData $archive): void
     {
         if ($archive instanceof ZipArchive) {
-            return substr($archive->filename, strrpos($archive->filename, DS) + 1);
+            $archive->close();
         } else {
-            return $archive->getMetadata()['archiveFileName'];
-        }
-    }
-
-    public function close(ZipArchive|PharData $zip)
-    {
-        if ($zip instanceof ZipArchive) {
-            $zip->close();
-        } else {
-            $zip->delMetadata();
+            $archive->delMetadata();
         }
     }
 }
