@@ -5,39 +5,42 @@ document.addEventListener("DOMContentLoaded", function () {
     const code = document.querySelector('#help-modal .code');
 
     // Setup help button click listener, toggles modal display
-    help.addEventListener('click', function (event) {
-        if (modal.classList.contains('is-open')) {
-            MicroModal.close('help-modal');
-        } else {
-            MicroModal.show('help-modal', {
-                disableFocus: true
-            });
-        }
-    });
+    if(help) {
+        help.addEventListener('click', function (event) {
+            if (modal.classList.contains('is-open')) {
+                MicroModal.close('help-modal');
+            } else {
+                MicroModal.show('help-modal', {
+                    disableFocus: true
+                });
+            }
+        });
+    }
 
     // Setup command line usage code copy to clipboard functionality
-    copy.addEventListener('click', function (event) {
-        // Copy to clipboard automatically if possible
-        const textarea = document.createElement("textarea");
-        textarea.value = code.innerText;
+    if(copy) {
+        copy.addEventListener('click', function (event) {
+            // Copy to clipboard automatically if possible
+            const textarea = document.createElement("textarea");
+            textarea.value = code.innerText;
 
-        textarea.style.top = "0";
-        textarea.style.left = "0";
-        textarea.style.position = "fixed";
+            textarea.style.top = "0";
+            textarea.style.left = "0";
+            textarea.style.position = "fixed";
 
-        document.body.appendChild(textarea);
-        textarea.focus();
-        textarea.select();
-        document.execCommand('copy');
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            document.execCommand('copy');
 
-        document.body.removeChild(textarea);
+            document.body.removeChild(textarea);
 
-        // Select text automatically, user can press Ctrl+C to copy manually if needed
-        const range = document.createRange();
-        range.selectNodeContents(code);
-        window.getSelection().removeAllRanges();
-        window.getSelection().addRange(range);
-    });
-
+            // Select text automatically, user can press Ctrl+C to copy manually if needed
+            const range = document.createRange();
+            range.selectNodeContents(code);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+        });
+    }
 
 });
