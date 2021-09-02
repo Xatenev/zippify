@@ -2,7 +2,6 @@
 
 namespace Xatenev\Zippify\Controller;
 
-use RuntimeException;
 use Slim\App;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
@@ -19,7 +18,7 @@ return function (App $app) {
             /** @var ArchiveService $archiveService */
             $archiveService = $this->get('archiveService');
 
-            if(!$uploadService->check($request->getUploadedFiles()['file'])) {
+            if (!$uploadService->check($request->getUploadedFiles()['file'])) {
                 return $response->withStatus(400, 'Bad file input detected');
             }
 
