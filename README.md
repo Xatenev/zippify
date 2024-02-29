@@ -1,5 +1,5 @@
 # Zippify
-This tool allows you to download a generated zip/tar from multiple files.
+This tool allows you to download a generated zip/tar from multiple files and was developed as my submission for a hackathon community challenge.
 
 ![Zippify](https://github.com/xatenev/zippify/blob/master/github/Zippify.png?raw=true)
 
@@ -29,19 +29,19 @@ composer start -- 9999
 ````
 
 ### Scripts
-> composer start
+    composer start
 
 Start the webserver
 
-> composer update-signatures 
+    composer update-signatures 
 
 Synchronize virus signatures with clamav
 
-> composer clean
+    composer clean
 
 Clean unnecessary files (those that have either not been created with sharing in mind, or those that have expired)
 
-> composer force-clean
+    composer force-clean
 
 Clean all files
 
