@@ -19,7 +19,6 @@ class UpdateSignaturesCommand
      */
     const SIGNATURES = [
         'clamav.cedb',
-        'clamav.db',
         'clamav.fdb',
         'clamav.hdb',
         'clamav.htdb',
@@ -27,26 +26,7 @@ class UpdateSignaturesCommand
         'clamav.ndb',
         'clamav_elf.db',
         'clamav_elf_regex.db',
-        'clamav_email.db',
-        'clamav_email_regex.db',
         'clamav_exe.db',
-        'clamav_exe_regex.db',
-        'clamav_graphics.db',
-        'clamav_graphics_regex.db',
-        'clamav_java.db',
-        'clamav_java_regex.db',
-        'clamav_macho.db',
-        'clamav_macho_regex.db',
-        'clamav_ole.db',
-        'clamav_ole_regex.db',
-        'clamav_pdf.db',
-        'clamav_pdf_regex.db',
-        'clamav_regex.db',
-        'clamav_regex.db',
-        'clamav_regex.htdb',
-        'clamav_regex.ndb',
-        'clamav_swf.db',
-        'clamav_swf_regex.db',
     ];
 
     const SIGNATURES_URL = 'https://github.com/phpMussel/Signatures/blob/master/clamav/%s?raw=true';
