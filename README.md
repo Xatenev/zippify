@@ -4,7 +4,7 @@ This tool allows you to download a generated zip/tar from multiple files and was
 ![Zippify](https://github.com/xatenev/zippify/blob/master/github/Zippify.png?raw=true)
 
 ## Web
-http://zippify.xatenev.com/
+https://zippify.xatenev.com/
 
 ## Features
 - Drag and drop functionality
