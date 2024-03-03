@@ -29,21 +29,23 @@ composer start -- 9999
 ````
 
 ### Scripts
-    composer start
 
 Start the webserver
 
-    composer update-signatures 
+    composer start -- 9999
 
 Synchronize virus signatures with clamav
 
-    composer clean
+    composer update-signatures 
 
 Clean unnecessary files (those that have either not been created with sharing in mind, or those that have expired)
 
-    composer force-clean
+    composer clean
 
 Clean all files
+
+    composer force-clean
+
 
 ## Possible later enhancements
 - [ ] decompress functionality (upload zip, get list of files inside. have to be careful here, zipbomb etc.)

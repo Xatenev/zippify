@@ -62,7 +62,7 @@ class UpdateSignaturesCommand
 
             $resource = Utils::tryFopen($filename, 'wb');
             $stream = Utils::streamFor($resource);
-            $client->request('GET', $url, ['sink' => $stream]);
+            $client->request('GET', $url, ['verify' => false, 'sink' => $stream]);
             fclose($resource);
 
             $file = gzopen($filename, 'rb');
